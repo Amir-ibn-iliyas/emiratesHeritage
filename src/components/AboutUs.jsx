@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Building2, Home, Factory } from "lucide-react";
+import commercialImg from "../assets/images/commercial.png";
+import residentialImg from "../assets/images/resisdential.png";
+import industrialImg from "../assets/images/industrial.png";
+import provideLeftImg from "../assets/images/provideleft.jpg";
+import provideBgImg from "../assets/images/provide.png";
 
 const categories = {
   Commercial: {
-    img: "src/assets/images/commercial.png",
+    img: commercialImg,
     title: "Commercial",
     desc1:
       "We excel in commercial construction projects, meticulously planning and executing to ensure optimal value and delivery.",
@@ -12,7 +17,7 @@ const categories = {
       "Our specialized teams uphold rigorous safety standards and strict regulatory compliance in every build, prioritizing client satisfaction above all. With a proven track record of successful commercial developments, our commitment is to transform your vision into a durable, functional, and profitable reality.",
   },
   Residential: {
-    img: "src/assets/images/resisdential.png",
+    img: residentialImg,
     title: "Residential",
     desc1:
       "We craft unique residential homes, meticulously designing and building the spaces where life's most cherished memories begin and endure.",
@@ -20,7 +25,7 @@ const categories = {
       "Our dedicated builders take immense pride in detailed craftsmanship and personalized service, ensuring every corner and fixture meets your exact specifications. Partner with us to turn your architectural vision into a secure, beautiful, and lasting place to call home, built with integrity and trust.",
   },
   Industrial: {
-    img: "src/assets/images/industrial.png",
+    img: industrialImg,
     title: "Industrial",
     desc1:
       "We specialize in large-scale industrial infrastructure, designing and constructing facilities that maximize operational output and long-term durability.",
@@ -183,7 +188,7 @@ const AboutUs = () => {
       {/* future section */}
       <section
         className="relative w-screen mb-4  md:w-full bg-cover bg-center py-5 lg:py-10"
-        style={{ backgroundImage: "url('/src/assets/images/provide.png')" }}
+        style={{ backgroundImage: `url(${provideBgImg})` }}
       >
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-black/10 bg-opacity-50"></div>
@@ -211,7 +216,7 @@ const AboutUs = () => {
                   damping: 10,
                   duration: 0.5, // Added duration as a fallback
                 }}
-                src="/src/assets/images/provideleft.jpg"
+                src={provideLeftImg}
                 className="w-full cursor-pointer md:w-[400px] rounded-lg h-64 md:h-full object-cover"
                 alt="construction"
               />

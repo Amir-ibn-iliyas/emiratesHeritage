@@ -1,8 +1,7 @@
 import { useState } from "react";
-
+import heroImage from "../assets/images/heroImage2.png";
 
 const Hero = () => {
- 
   return (
     <>
       <section
@@ -13,7 +12,7 @@ const Hero = () => {
         <div
           id="hero-bg"
           className="absolute inset-0 bg-cover bg-center transition-transform duration-[2000ms] ease-out"
-          style={{ backgroundImage: "url('src/assets/images/heroImage2.png')" }}
+          style={{ backgroundImage: `url(${heroImage})` }}
         />
 
         {/* Gradient Overlay */}
@@ -92,8 +91,6 @@ const Hero = () => {
         }
       `}</style>
       </section>
-
-
     </>
   );
 };
