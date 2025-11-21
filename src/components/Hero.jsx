@@ -1,5 +1,5 @@
 import { useState } from "react";
-import heroImage from "../assets/images/heroImage2.png";
+import heroImage from "../assets/images/heroImage2.webp";
 
 const Hero = () => {
   return (
