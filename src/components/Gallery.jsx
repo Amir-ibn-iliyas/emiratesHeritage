@@ -1,11 +1,11 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 // --- IMAGE IMPORTS (Keep your existing imports) ---
-import leftTopImg from '../assets/images/commercial.png';
-import leftBottomImg from '../assets/images/industrial.png';
-import centerImg from '../assets/images/heroImage2.png';
-import rightTopImg from '../assets/images/industrial.png';
-import rightBottomImg from '../assets/images/industrial.png';
+import leftTopImg from '../assets/images/commercial.webp';
+import leftBottomImg from '../assets/images/industrial.webp';
+import centerImg from '../assets/images/heroImage2.webp';
+import rightTopImg from '../assets/images/industrial.webp';
+import rightBottomImg from '../assets/images/industrial.webp';
 
 const Gallery = () => {
   const [width, setWidth] = useState(0);
