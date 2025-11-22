@@ -1,5 +1,5 @@
 import { useState } from "react";
-import heroImage from "../assets/images/heroImage2.webp";
+import heroImage from "../../public/heroImage2.webp";
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);

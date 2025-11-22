@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 // --- IMAGE IMPORTS (Keep your existing imports) ---
 import leftTopImg from '../assets/images/commercial.webp';
 import leftBottomImg from '../assets/images/industrial.webp';
-import centerImg from '../assets/images/heroImage2.webp';
+import centerImg from '../../public/heroImage2.webp';
 import rightTopImg from '../assets/images/industrial.webp';
 import rightBottomImg from '../assets/images/industrial.webp';
 
