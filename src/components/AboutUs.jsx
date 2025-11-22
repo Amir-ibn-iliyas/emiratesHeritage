@@ -40,7 +40,6 @@ const AboutUs = () => {
 
   return (
     <>
-      {/* Focus On Expertise */}
 
       <section id="about" className="w-screen md:w-full md:px-3 lg:px-10 py-5">
         {/* Heading */}

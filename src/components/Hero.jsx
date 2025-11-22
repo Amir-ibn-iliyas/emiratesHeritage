@@ -2,17 +2,20 @@ import { useState } from "react";
 import heroImage from "../assets/images/heroImage2.webp";
 
 const Hero = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
   return (
     <>
-      <section
+     <section
         id="home"
-        className="relative h-[30vh] md:h-[40vh] lg:h-[90vh] overflow-hidden"
+        className="relative h-[30vh] md:h-[40vh] lg:h-[90vh] overflow-hidden bg-gray-900" 
       >
-        {/* Background */}
-        <div
-          id="hero-bg"
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-[2000ms] ease-out"
-          style={{ backgroundImage: `url(${heroImage})` }}
+        
+        <img
+          src={heroImage}
+          alt="Heritage Background"
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-out 
+            ${isLoaded ? "opacity-100" : "opacity-0"}`} 
+          onLoad={() => setIsLoaded(true)} 
         />
 
         {/* Gradient Overlay */}
