@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Building2, Home, Factory } from "lucide-react";
-import commercialImg from "../assets/images/commercial.png";
-import residentialImg from "../assets/images/resisdential.png";
-import industrialImg from "../assets/images/industrial.png";
-import provideLeftImg from "../assets/images/provideleft.jpg";
-import provideBgImg from "../assets/images/provide.png";
+import commercialImg from "../assets/images/commercial.webp";
+import residentialImg from "../assets/images/resisdential.webp";
+import industrialImg from "../assets/images/industrial.webp";
+import provideLeftImg from "../assets/images/provideleft.webp";
+import provideBgImg from "../assets/images/provide.webp";
 
 const categories = {
   Commercial: {
