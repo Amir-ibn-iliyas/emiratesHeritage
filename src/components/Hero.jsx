@@ -12,6 +12,7 @@ const Hero = () => {
         
         <img
           src={heroImage}
+          fetchPriority="high"
           alt="Heritage Background"
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-out 
             ${isLoaded ? "opacity-100" : "opacity-0"}`} 

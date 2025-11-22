@@ -1,20 +1,16 @@
-import React from 'react';
 
 const Chatbot = () => {
-  // 1. Setup the WhatsApp URL with your number and encoded message
-  const phoneNumber = "971554866494"; // No '+' or spaces
+  const phoneNumber = "971554866494"; 
   const message = encodeURIComponent("I want some enquiry on your services");
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 
   return (
     <div className="fixed bottom-4 md:bottom-8 right-4 md:right-8 z-20 flex items-center justify-center group">
       
-      {/* --- OPTIONAL: Tooltip Text (Appears on Hover) --- */}
       <span className="absolute right-16 bg-white text-slate-800 text-sm font-bold px-3 py-1 rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
         Chat with us
       </span>
 
-      {/* --- THE BUTTON LINK --- */}
       <a 
         href={whatsappUrl}
         target="_blank"
@@ -22,12 +18,10 @@ const Chatbot = () => {
         className="relative flex items-center justify-center w-10 md:w-12 h-10 md:h-12 bg-[#25D366] rounded-full shadow-2xl hover:bg-[#20bd5a] transition-colors duration-300"
         aria-label="Chat on WhatsApp"
       >
-        {/* --- THE BLINKING RING ANIMATION --- 
-            This span sits behind the main button and "pings" outward
-        */}
+      
         <span className="absolute inline-flex h-full w-full rounded-full bg-[#37C2CF] opacity-75 animate-ping"></span>
         
-        {/* --- MAIN ICON (WhatsApp SVG) --- */}
+       
         {/* Z-10 ensures the icon sits on top of the animation */}
         <div className="relative z-10 text-white">
             <svg 
