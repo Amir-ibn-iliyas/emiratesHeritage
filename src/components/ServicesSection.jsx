@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import Tilt from "react-parallax-tilt";
 import {
   Home,
@@ -10,42 +11,13 @@ import {
   Expand,
 } from "lucide-react";
 
-const services = [
-  {
-    title: "House Construction",
-    icon: <Home size={32} />,
-    desc: "We build high-quality, custom homes and villas. From foundation to finish, we manage every detail to deliver your dream residence on time and to specification.",
-  },
-  {
-    title: "Warehouse Construction",
-
-    icon: <Warehouse size={32} />,
-
-    desc: "Building operational excellence. We specialize in robust, functional, and scalable warehouse construction and fit-outs, designed for logistics, storage, and industrial efficiency.",
-  },
-  {
-    title: "Swimming Pool Construction",
-    icon: <Waves size={32} />,
-    desc: "Creating bespoke aquatic retreats. We design and build high-quality, custom swimming pools and water features, ensuring durability and stunning finishes for private and commercial clients.",
-  },
-
-  {
-    title: "Decoration",
-
-    icon: <Paintbrush size={32} />,
-
-    desc: "Transforming spaces into stunning realities. From high-end villa interiors to functional restaurant design, we manage all decoration and fit-out phases with polished, bespoke results.",
-  },
-  {
-    title: "Service & Maintenance",
-    icon: <Wrench size={32} />,
-    desc: "Protecting your investment reliably. Comprehensive upkeep and repair services for all residential and commercial properties, ensuring longevity and optimal function of your buildings.",
-  },
-  {
-    title: "House Extensions",
-    icon: <Expand size={32} />,
-    desc: "Expand your living space seamlessly. We handle the entire process—from structural design and permitting to construction—delivering high quality and optimal function of your buildings.",
-  },
+const serviceKeys = [
+  { key: "house", icon: <Home size={32} /> },
+  { key: "warehouse", icon: <Warehouse size={32} /> },
+  { key: "pool", icon: <Waves size={32} /> },
+  { key: "decoration", icon: <Paintbrush size={32} /> },
+  { key: "maintenance", icon: <Wrench size={32} /> },
+  { key: "extensions", icon: <Expand size={32} /> },
 ];
 
 const fadeUpBlur = {
@@ -65,10 +37,17 @@ const fadeUpBlur = {
 const ServicesSection = () => {
   const [width, setWidth] = useState(0);
   const carouselRef = useRef();
+  const { t } = useTranslation();
+
+  // Build translated services array
+  const services = serviceKeys.map((s) => ({
+    title: t(`services.${s.key}.title`),
+    desc: t(`services.${s.key}.desc`),
+    icon: s.icon,
+  }));
 
   useEffect(() => {
     if (carouselRef.current) {
-      // Calculate the drag limit (Total width - visible width)
       setWidth(
         carouselRef.current.scrollWidth - carouselRef.current.offsetWidth
       );

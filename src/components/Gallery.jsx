@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 // --- IMAGE IMPORTS (Keep your existing imports) ---
 import leftTopImg from '../assets/images/commercial.webp';
 import leftBottomImg from '../assets/images/industrial.webp';
@@ -10,6 +11,7 @@ import rightBottomImg from '../assets/images/industrial.webp';
 const Gallery = () => {
   const [width, setWidth] = useState(0);
   const carouselRef = useRef();
+  const { t } = useTranslation();
 
   const images = {
     leftTop: leftTopImg,
@@ -48,10 +50,10 @@ const Gallery = () => {
           className="text-center mb-5 md:mb-10"
         >
           <h2 className="text-4xl md:text-5xl  font-bold text-slate-900 tracking-tight">
-            Our Gallery
+            {t("gallery.title")}
           </h2>
           <p className="text-slate-600 mt-2 text-lg">
-            A closer look at our craftsmanship, engineering, and design excellence.
+            {t("gallery.subtitle")}
           </p>
         </motion.div>
 

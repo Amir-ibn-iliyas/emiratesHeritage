@@ -1,46 +1,28 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Building2, Home, Factory } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import commercialImg from "../assets/images/commercial.webp";
 import residentialImg from "../assets/images/resisdential.webp";
 import industrialImg from "../assets/images/industrial.webp";
 import provideLeftImg from "../assets/images/provideleft.webp";
 import provideBgImg from "../assets/images/provide.webp";
 
-const categories = {
-  Commercial: {
-    img: commercialImg,
-    title: "Commercial",
-    desc1:
-      "We excel in commercial construction projects, meticulously planning and executing to ensure optimal value and delivery.",
-    desc2:
-      "Our specialized teams uphold rigorous safety standards and strict regulatory compliance in every build, prioritizing client satisfaction above all. With a proven track record of successful commercial developments, our commitment is to transform your vision into a durable, functional, and profitable reality.",
-  },
-  Residential: {
-    img: residentialImg,
-    title: "Residential",
-    desc1:
-      "We craft unique residential homes, meticulously designing and building the spaces where life's most cherished memories begin and endure.",
-    desc2:
-      "Our dedicated builders take immense pride in detailed craftsmanship and personalized service, ensuring every corner and fixture meets your exact specifications. Partner with us to turn your architectural vision into a secure, beautiful, and lasting place to call home, built with integrity and trust.",
-  },
-  Industrial: {
-    img: industrialImg,
-    title: "Industrial",
-    desc1:
-      "We specialize in large-scale industrial infrastructure, designing and constructing facilities that maximize operational output and long-term durability.",
-    desc2:
-      "Our engineering expertise guarantees the highest standards of structural integrity and safety across complex manufacturing and logistics centers.With a focus on timely, budget-conscious project delivery, we ensure your critical industrial assets are built for dependable, uninterrupted high performance.",
-  },
+const categoryImages = {
+  Commercial: commercialImg,
+  Residential: residentialImg,
+  Industrial: industrialImg,
 };
+
 const AboutUs = () => {
   const [activeTab, setActiveTab] = useState("Residential");
+  const { t } = useTranslation();
 
-  const current = categories[activeTab];
+  // Translation keys mapped to tab keys
+  const tabKey = activeTab.toLowerCase(); // "residential", "commercial", "industrial"
 
   return (
     <>
-
       <section id="about" className="w-screen md:w-full md:px-3 lg:px-10 py-5">
         {/* Heading */}
         <motion.div
@@ -51,12 +33,10 @@ const AboutUs = () => {
           className="flex flex-col items-center text-center"
         >
           <h1 className="text-xl md:text-4xl lg:text-5xl font-bold">
-            Focus on Expertise and Full Scope
+            {t("about.title")}
           </h1>
           <p className="text-[10px] px-4 md:px-0 md:text-[16px] mt-3 md:w-3/4 lg:w-1/2">
-            We provide complete construction, enhancement, and maintenance
-            services for residential (Houses, Villas, Pools) and commercial
-            (Warehouses, Restaurants) properties.
+            {t("about.subtitle")}
           </p>
         </motion.div>
 
@@ -94,7 +74,7 @@ const AboutUs = () => {
         }`}
             >
               {item.icon}
-              {item.label}
+              {t(`about.tabs.${item.label.toLowerCase()}`)}
             </motion.button>
           ))}
         </motion.div>
@@ -109,15 +89,15 @@ const AboutUs = () => {
         >
           {/* Image */}
           <motion.div
-            key={current.img}
+            key={categoryImages[activeTab]}
             initial={{ opacity: 0, x: -25 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             className="w-full  md:w-1/2 cursor-pointer"
           >
             <motion.img
-              src={current.img}
-              alt={current.title}
+              src={categoryImages[activeTab]}
+              alt={t(`about.${tabKey}.title`)}
               whileHover={{
                 scale: 1.02,
                 rotate: 1.2,
@@ -127,7 +107,7 @@ const AboutUs = () => {
               transition={{
                 stiffness: 200,
                 damping: 10,
-                duration: 0.5, // Added duration as a fallback
+                duration: 0.5,
               }}
               className="h-56  w-full  md:w-[400px] md:h-[360px] object-cover rounded-md"
             />
@@ -150,7 +130,7 @@ const AboutUs = () => {
               }}
               className="text-xl md:text-3xl font-bold md:mb-3"
             >
-              {current.title}
+              {t(`about.${tabKey}.title`)}
             </motion.h2>
 
             <motion.p
@@ -160,7 +140,7 @@ const AboutUs = () => {
               }}
               className="text-sm lg:w-2/3 md:text-base"
             >
-              {current.desc1}
+              {t(`about.${tabKey}.desc1`)}
             </motion.p>
 
             <motion.p
@@ -170,21 +150,13 @@ const AboutUs = () => {
               }}
               className="text-sm lg:w-2/3 md:text-base"
             >
-              {current.desc2}
+              {t(`about.${tabKey}.desc2`)}
             </motion.p>
-{/* 
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-[#37C2CF] hover:bg-[#32b4c0] cursor-pointer text-black px-6 py-2 w-fit mt-4 rounded-md"
-            >
-              Read More
-            </motion.button> */}
           </motion.div>
         </motion.div>
       </section>
 
-      {/* future section */}
+      {/* Provide Your Future section */}
       <section
         className="relative w-screen mb-4  md:w-full bg-cover bg-center py-5 lg:py-10"
         style={{ backgroundImage: `url(${provideBgImg})` }}
@@ -198,22 +170,19 @@ const AboutUs = () => {
             {/* LEFT IMAGE */}
             <div className="w-full md:w-1/2">
               <motion.img
-                // --- NEW: Entry Animation ---
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ amount: 0.3 }}
-                // --- EXISTING: Hover Animation ---
                 whileHover={{
                   scale: 1.05,
                   rotate: 1.2,
                   translateY: -2,
                   boxShadow: "0px 15px 40px rgba(0,0,0,0.35)",
                 }}
-                // --- Transition Settings (Controls speed of both) ---
                 transition={{
                   stiffness: 200,
                   damping: 10,
-                  duration: 0.5, // Added duration as a fallback
+                  duration: 0.5,
                 }}
                 src={provideLeftImg}
                 className="w-full cursor-pointer md:w-[400px] rounded-lg h-64 md:h-full object-cover"
@@ -224,33 +193,18 @@ const AboutUs = () => {
             {/* RIGHT CONTENT */}
             <div className="w-full  rounded-md md:w-2/3 bg-black/40 text-white p-2 lg:p-10 flex flex-col gap-4">
               <h2 className="text-2xl md:text-4xl font-bold text-[#37C2CF]">
-                We Provide Your Future
+                {t("provide.title")}
               </h2>
 
               <p className="leading-relaxed text-sm md:text-base">
-                We don’t just plan for tomorrow; we build it. Our expert
-                guidance and strategic solutions are designed to transform your
-                aspirations into reality, ensuring a clear, confident path
-                forward. Navigating complexity is our expertise, securing your
-                future is our promise.
+                {t("provide.desc")}
               </p>
 
               <ul className="list-disc pl-5 space-y-2 text-sm md:text-base">
-                <li>
-                  Sustainable growth and success. Clear Roadmaps: Tailored
-                  strategies for rapid, lasting growth.
-                </li>
-                <li>
-                  Future Ready: Innovative solutions that anticipate change.
-                </li>
-                <li>
-                  True Partnership: Dedicated support until your vision is
-                  achieved.
-                </li>
-                <li>
-                  Aliquam id ante suscipit. Drive Action: Tools and confidence
-                  to master every challenge.
-                </li>
+                <li>{t("provide.point1")}</li>
+                <li>{t("provide.point2")}</li>
+                <li>{t("provide.point3")}</li>
+                <li>{t("provide.point4")}</li>
               </ul>
             </div>
           </div>

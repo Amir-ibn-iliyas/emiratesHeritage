@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const { t } = useTranslation();
+
   return (
     <>
      <section
@@ -39,12 +42,12 @@ const Hero = () => {
         </div>
 
         {/* Content */}
-        <div className="relative h-full flex items-end pb-16 px-6 sm:items-center sm:pb-0 sm:px-10 lg:px-20 md:justify-end">
+        <div className="relative h-full flex items-end pb-5 px-6 sm:pb-20 sm:px-10 lg:px-20 md:justify-end">
           <div className="w-full sm:w-4/5 md:w-1/2 text-white flex flex-col justify-center space-y-5 md:space-y-6 animate-fadeSlideUp">
             <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight">
-              Professional Quality.
+              {t("hero.title1")}
               <br />
-              Effortless Service.
+              {t("hero.title2")}
             </h1>
 
             {/* Two CTA Buttons */}
@@ -55,7 +58,7 @@ const Hero = () => {
                 className="relative text-center text-sm md:text-lg cursor-pointer px-6 md:px-7 py-3 md:py-3.5 bg-[#37C2CF] text-white font-semibold rounded-xl 
                 overflow-hidden group transition duration-300"
               >
-                <span className="relative z-10">Our Services</span>
+                <span className="relative z-10">{t("hero.cta1")}</span>
                 <div className="absolute inset-0 bg-white/20 translate-x-[-120%] group-hover:translate-x-[120%] transition duration-500 ease-out"></div>
               </Link>
 
@@ -65,7 +68,7 @@ const Hero = () => {
                 className="relative text-center text-sm md:text-lg cursor-pointer px-6 md:px-7 py-3 md:py-3.5 bg-white/10 text-white font-semibold rounded-xl 
                 overflow-hidden group transition duration-300 border border-white/25 hover:bg-white/20 backdrop-blur-sm"
               >
-                <span className="relative z-10">Contact Us</span>
+                <span className="relative z-10">{t("hero.cta2")}</span>
               </Link>
             </div>
           </div>

@@ -1,9 +1,11 @@
 import React from "react";
 import { Phone, Mail, MapPin, Instagram } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import Logo from "../assets/images/logo.png";
 
 const Footer = () => {
   const year = new Date().getFullYear();
+  const { t } = useTranslation();
 
   return (
     <footer className="bg-[#0a1628]">
@@ -15,7 +17,7 @@ const Footer = () => {
             <img src={Logo} alt="Emirates Heritage" className="w-8 h-8 object-contain" />
             <div>
               <span className="text-white font-semibold text-base block">Emirates Heritage</span>
-              <span className="text-white/30 text-xs">Building Excellence Since Day One</span>
+              <span className="text-white/30 text-xs">{t("footer.tagline")}</span>
             </div>
           </div>
 

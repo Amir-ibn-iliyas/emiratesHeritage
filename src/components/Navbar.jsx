@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { Link, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Logo from "../assets/images/logo.png";
 
 const Navbar = () => {
@@ -10,6 +11,22 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const lastScrollY = useRef(0);
   const location = useLocation();
+  const { t, i18n } = useTranslation();
+
+  const isArabic = i18n.language === "ar";
+
+  // Toggle language
+  const toggleLanguage = () => {
+    const newLang = isArabic ? "en" : "ar";
+    i18n.changeLanguage(newLang);
+    localStorage.setItem("lang", newLang);
+    document.documentElement.lang = newLang;
+  };
+
+  // Set html lang on mount
+  useEffect(() => {
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,9 +53,9 @@ const Navbar = () => {
   }, [location.pathname]);
 
   const navItems = [
-    { name: "Home", path: "/" },
-    { name: "About Us", path: "/", hash: "about" },
-    { name: "Services", path: "/services" },
+    { name: t("nav.home"), path: "/" },
+    { name: t("nav.about"), path: "/", hash: "about" },
+    { name: t("nav.services"), path: "/services" },
   ];
 
   const handleNavClick = (item) => {
@@ -91,10 +108,6 @@ const Navbar = () => {
         transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
         className="fixed top-0 left-0 right-0 z-50"
       >
-        {/* 
-          STATE 1 (atTop): Fully transparent — just white text floating over hero 
-          STATE 2 (scrolled): White frosted glass pill with dark text
-        */}
         <div
           className={`transition-all duration-500 ease-out ${
             scrolled
@@ -136,68 +149,79 @@ const Navbar = () => {
                 </span>
               </Link>
 
-              {/* ── Desktop Links ── */}
-              <div className="hidden md:flex items-center gap-1">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.hash ? `/#${item.hash}` : item.path}
-                    onClick={() => handleNavClick(item)}
-                    className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                      scrolled
-                        ? isActive(item)
-                          ? "text-[#37C2CF] font-semibold"
+              {/* ── Right side: Desktop Links + Lang Toggle + Mobile Menu ── */}
+              <div className="flex items-center gap-1">
+                {/* Desktop Links (hidden on mobile) */}
+                <div className="hidden md:flex items-center gap-1">
+                  {navItems.map((item) => (
+                    <Link
+                      key={item.name}
+                      to={item.hash ? `/#${item.hash}` : item.path}
+                      onClick={() => handleNavClick(item)}
+                      className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                        scrolled
+                          ? isActive(item)
+                            ? "text-[#37C2CF] font-semibold"
+                            : "text-white hover:text-white"
+                          : isActive(item)
+                          ? "text-white font-semibold"
                           : "text-white hover:text-white"
-                        : isActive(item)
-                        ? "text-white font-semibold"
-                        : "text-white hover:text-white"
-                    }`}
-                  >
-                    {item.name}
+                      }`}
+                    >
+                      {item.name}
 
-                    {/* Active dot indicator */}
-                    {isActive(item) && (
-                      <motion.span
-                        layoutId="navDot"
-                        className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full ${
-                          scrolled ? "bg-[#37C2CF]" : "bg-white"
-                        }`}
-                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                      />
-                    )}
-                  </Link>
-                ))}
+                      {/* Active dot indicator */}
+                      {isActive(item) && (
+                        <motion.span
+                          layoutId="navDot"
+                          className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full ${
+                            scrolled ? "bg-[#37C2CF]" : "bg-white"
+                          }`}
+                          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                        />
+                      )}
+                    </Link>
+                  ))}
 
-                {/* CTA Button */}
-                <div className={`ml-3 ${scrolled ? "" : ""}`}>
-                  <Link
-                    to="/contact"
-                    className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
-                      scrolled
-                        ? "bg-[#37C2CF] text-white shadow-lg shadow-[#37C2CF]/25 hover:shadow-xl hover:shadow-[#37C2CF]/35 hover:bg-[#2eb3bf]"
-                        : "bg-white/15 text-white backdrop-blur-sm border border-white/20 hover:bg-white/25"
-                    }`}
-                  >
-                    Get a Quote
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3.5 h-3.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                    </svg>
-                  </Link>
+                  {/* CTA Button */}
+                  <div className="ml-3">
+                    <Link
+                      to="/contact"
+                      className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+                        scrolled
+                          ? "bg-[#37C2CF] text-white shadow-lg shadow-[#37C2CF]/25 hover:shadow-xl hover:shadow-[#37C2CF]/35 hover:bg-[#2eb3bf]"
+                          : "bg-white/15 text-white backdrop-blur-sm border border-white/20 hover:bg-white/25"
+                      }`}
+                    >
+                      {t("nav.getQuote")}
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3.5 h-3.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                      </svg>
+                    </Link>
+                  </div>
                 </div>
-              </div>
 
-              {/* ── Mobile Toggle ── */}
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className={`md:hidden w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300 ${
-                  scrolled
-                    ? "text-white hover:bg-white/10"
-                    : "text-white hover:bg-white/10"
-                }`}
-                aria-label="Toggle menu"
-              >
-                <HiMenuAlt3 size={22} />
-              </button>
+                {/* Language Toggle (always visible) */}
+                <button
+                  onClick={toggleLanguage}
+                  className="px-5 py-1 ml-2 rounded-full text-lg font-semibold text-white border border-white/15 hover:border-white/30 hover:bg-white/10 transition-all duration-300 cursor-pointer"
+                >
+                  {isArabic ? "ENG" : "عربي"}
+                </button>
+
+                {/* Mobile Menu Toggle */}
+                <button
+                  onClick={() => setIsOpen(!isOpen)}
+                  className={`md:hidden w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300 ${
+                    scrolled
+                      ? "text-white hover:bg-white/10"
+                      : "text-white hover:bg-white/10"
+                  }`}
+                  aria-label="Toggle menu"
+                >
+                  <HiMenuAlt3 size={22} />
+                </button>
+              </div>
             </div>
           </nav>
         </div>
@@ -245,6 +269,8 @@ const Navbar = () => {
 
               <div className="w-full h-px bg-gray-100 mb-2"></div>
 
+
+
               {/* Links */}
               <div className="flex flex-col px-4 space-y-1 mt-2">
                 {navItems.map((item) => (
@@ -277,7 +303,7 @@ const Navbar = () => {
                       shadow-lg shadow-[#37C2CF]/20 hover:shadow-xl hover:shadow-[#37C2CF]/30
                       hover:bg-[#2eb3bf] transition-all duration-300"
                   >
-                    Get a Quote
+                    {t("nav.getQuote")}
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                     </svg>
