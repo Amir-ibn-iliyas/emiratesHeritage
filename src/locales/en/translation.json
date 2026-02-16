@@ -50,29 +50,53 @@
   "services": {
     "pageTitle": "Our Services",
     "pageSubtitle": "Full-scope construction & property solutions — from villas to warehouses.",
+    "opening": {
+      "line1": "Every great structure",
+      "line2": "begins with a",
+      "line3": "vision.",
+      "scroll": "Scroll to explore"
+    },
     "house": {
+      "chapter": "Chapter 01",
+      "headline": "It Starts With the Ground",
       "title": "House Construction",
       "desc": "We build high-quality, custom homes and villas. From foundation to finish, we manage every detail to deliver your dream residence on time and to specification."
     },
     "warehouse": {
+      "chapter": "Chapter 02",
+      "headline": "Scale Without Limits",
       "title": "Warehouse Construction",
       "desc": "Building operational excellence. We specialize in robust, functional, and scalable warehouse construction and fit-outs, designed for logistics, storage, and industrial efficiency."
     },
     "pool": {
+      "chapter": "Chapter 03",
+      "headline": "Where Luxury Meets Water",
       "title": "Swimming Pool Construction",
       "desc": "Creating bespoke aquatic retreats. We design and build high-quality, custom swimming pools and water features, ensuring durability and stunning finishes for private and commercial clients."
     },
     "decoration": {
+      "chapter": "Chapter 04",
+      "headline": "The Art of Space",
       "title": "Decoration",
       "desc": "Transforming spaces into stunning realities. From high-end villa interiors to functional restaurant design, we manage all decoration and fit-out phases with polished, bespoke results."
     },
     "maintenance": {
+      "chapter": "Chapter 05",
+      "headline": "We Never Leave",
       "title": "Service & Maintenance",
       "desc": "Protecting your investment reliably. Comprehensive upkeep and repair services for all residential and commercial properties, ensuring longevity and optimal function of your buildings."
     },
     "extensions": {
+      "chapter": "Chapter 06",
+      "headline": "Room to Grow",
       "title": "House Extensions",
       "desc": "Expand your living space seamlessly. We handle the entire process—from structural design and permitting to construction—delivering high quality and optimal function of your buildings."
+    },
+    "finale": {
+      "line1": "You've seen what we can do.",
+      "line2": "Now let us build",
+      "line3": "your legacy.",
+      "cta": "Get a Quote"
     }
   },
   "contact": {

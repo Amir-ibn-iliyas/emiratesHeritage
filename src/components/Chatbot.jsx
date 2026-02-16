@@ -1,6 +1,6 @@
 
 const Chatbot = () => {
-  const phoneNumber = "971554866494"; 
+  const phoneNumber = "971503199090"; 
   const message = encodeURIComponent("I want some enquiry on your services");
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 
@@ -15,7 +15,7 @@ const Chatbot = () => {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="relative flex items-center justify-center w-10 md:w-12 h-10 md:h-12 bg-[#25D366] rounded-full shadow-2xl hover:bg-[#20bd5a] transition-colors duration-300"
+        className="relative flex items-center justify-center w-10 md:w-12 h-10 md:h-12 bg-[#37C2CF] rounded-full shadow-2xl hover:bg-[#20bd5a] transition-colors duration-300"
         aria-label="Chat on WhatsApp"
       >
       
