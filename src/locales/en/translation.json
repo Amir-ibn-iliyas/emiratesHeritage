@@ -102,11 +102,20 @@
   "contact": {
     "pageTitle": "Contact Us",
     "pageSubtitle": "Ready to start your project? Get in touch with our team.",
+    "info": {
+      "phone": "Phone",
+      "email": "Email",
+      "location": "Location",
+      "hours": "Working Hours",
+      "hoursValue": "Sun – Thu, 8AM – 6PM"
+    },
     "form": {
+      "heading": "Send Us a Message",
+      "subheading": "Fill in the details and we'll get back to you shortly.",
       "name": "Your Name",
       "email": "Email Address",
       "phone": "Phone Number",
-      "description": "Service Description",
+      "description": "Tell us about your project...",
       "submit": "Submit Request",
       "sending": "Sending..."
     },
@@ -114,6 +123,7 @@
       "nameRequired": "Name is required",
       "emailInvalid": "Please enter a valid email address",
       "phoneInvalid": "Please enter a valid phone number (digits only)",
+      "emailOrPhone": "Please provide either email or phone number",
       "messageMin": "Message must be at least 10 characters"
     },
     "success": {
