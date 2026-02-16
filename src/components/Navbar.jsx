@@ -55,6 +55,7 @@ const Navbar = () => {
   const navItems = [
     { name: t("nav.home"), path: "/" },
     { name: t("nav.about"), path: "/", hash: "about" },
+    { name: t("nav.gallery"), path: "/", hash: "gallery" },
     { name: t("nav.services"), path: "/services" },
   ];
 
