@@ -1,57 +1,65 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { HiMenu, HiX } from "react-icons/hi";
+import { HiMenuAlt3 } from "react-icons/hi";
+import { Link, useLocation } from "react-router-dom";
 import Logo from "../assets/images/logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
+  const lastScrollY = useRef(0);
+  const location = useLocation();
 
-  // Handle Scroll Background
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY.current && currentScrollY > 120) {
+        setVisible(false);
+      } else {
+        setVisible(true);
+      }
+      setScrolled(currentScrollY > 60);
+      lastScrollY.current = currentScrollY;
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // 2. PREVENT BODY SCROLL when Menu is Open
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden"; // Disable scrolling
-    } else {
-      document.body.style.overflow = "unset"; // Enable scrolling
-    }
+    document.body.style.overflow = isOpen ? "hidden" : "unset";
   }, [isOpen]);
-  // Define items with the specific ID of the section they should scroll to
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setIsOpen(false);
+  }, [location.pathname]);
+
   const navItems = [
-    { name: "Home", id: "home" },
-    { name: "About Us", id: "about" },
-    { name: "Services", id: "service" },
-    { name: "Gallery", id: "gallery" },
-    { name: "Contact Us", id: "contact" },
+    { name: "Home", path: "/" },
+    { name: "About Us", path: "/", hash: "about" },
+    { name: "Services", path: "/services" },
   ];
 
-  // Smooth Scroll Function
-  const scrollToSection = (id) => {
-    setIsOpen(false); // Close mobile menu if open
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 80; // Adjust this based on your navbar height
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
+  const handleNavClick = (item) => {
+    setIsOpen(false);
+    if (item.hash && location.pathname === "/") {
+      const element = document.getElementById(item.hash);
+      if (element) {
+        const offset = 100;
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = element.getBoundingClientRect().top;
+        const offsetPosition = elementRect - bodyRect - offset;
+        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+      }
     }
   };
 
-  // --- Animations ---
+  const isActive = (item) => {
+    if (item.hash) return false;
+    return location.pathname === item.path;
+  };
 
-  // Mobile Menu Container
   const menuVariants = {
     closed: {
       x: "100%",
@@ -60,161 +68,250 @@ const Navbar = () => {
     open: {
       x: 0,
       transition: {
-        type: "spring",
-        stiffness: 80,
-        damping: 20,
-        staggerChildren: 0.1,
-        delayChildren: 0.1  ,
+        type: "spring", stiffness: 80, damping: 20,
+        staggerChildren: 0.08, delayChildren: 0.15,
       },
     },
   };
 
-  // Mobile Link Items (Staggered Fade Up)
   const linkVariants = {
-    closed: { opacity: 0, y: 20 },
-    open: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+    closed: { opacity: 0, x: 30 },
+    open: { opacity: 1, x: 0, transition: { duration: 0.35 } },
   };
 
   return (
-    <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-[#37C2CF]/50 backdrop-blur-md shadow-lg py-4"
-          : "bg-[#37C2CF] py-4"
-      }`}
-    >
-      <div className="container mx-auto flex justify-between items-center px-4 sm:px-0 lg:px-20">
-        {/* Logo + Company Name */}
+    <>
+      {/* ===== NAVBAR ===== */}
+      <motion.header
+        initial={{ y: 0, opacity: 1 }}
+        animate={{
+          y: visible ? 0 : -100,
+          opacity: visible ? 1 : 0,
+        }}
+        transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+        className="fixed top-0 left-0 right-0 z-50"
+      >
+        {/* 
+          STATE 1 (atTop): Fully transparent — just white text floating over hero 
+          STATE 2 (scrolled): White frosted glass pill with dark text
+        */}
         <div
-          className="flex items-center space-x-5 cursor-pointer"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className={`transition-all duration-500 ease-out ${
+            scrolled
+              ? "px-4 md:px-8 lg:px-16 pt-3"
+              : "px-0 pt-0"
+          }`}
         >
-          <img
-            src={Logo}
-            alt="Emirates Heritage Logo"
-            className="w-10 h-10 object-contain"
-          />
-          <span className="text-white  text-xl tracking-wide">
-            Emirates Heritage
-          </span>
-        </div>
-
-        {/* Desktop Nav */}
-        <ul className="hidden md:flex md:space-x-3 lg:space-x-8  text-white items-center">
-          {navItems.map((item) => (
-            <li key={item.name} className="relative group">
-              <button
-                onClick={() => scrollToSection(item.id)}
-                className="text-lg  cursor-pointer hover:text-white transition-colors duration-300"
-              >
-                {item.name}
-              </button>
-              {/* Minimal Animated Underline */}
-              <span className="absolute -bottom-[1px] left-0 w-0 h-[1px] bg-yellow-200 transition-all duration-300 group-hover:w-full"></span>
-            </li>
-          ))}
-
-          {/* CTA Button */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => scrollToSection("contact")}
-            className="ml-4 bg-black md:hidden lg:block cursor-pointer text-white px-5 py-2 rounded-full font-semibold hover:bg-gray-900 hover:shadow-lg transition-all"
+          <nav
+            className={`mx-auto transition-all duration-500 ease-out ${
+              scrolled
+                ? "max-w-5xl rounded-2xl bg-black/25 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)]  "
+                : "max-w-full bg-transparent"
+            }`}
           >
-            Have Any Questions
-          </motion.button>
-        </ul>
+            <div
+              className={`flex items-center justify-between transition-all duration-500 ${
+                scrolled
+                  ? "px-4 md:px-7 py-2.5 md:py-3"
+                  : "px-5 md:px-10 lg:px-20 py-4 md:py-5"
+              }`}
+            >
+              {/* ── Logo ── */}
+              <Link to="/" className="flex items-center gap-3 group">
+                <img
+                  src={Logo}
+                  alt="Emirates Heritage"
+                  className={`object-contain transition-all duration-500 ${
+                    scrolled ? "w-7 h-7 md:w-8 md:h-8" : "w-8 h-8 md:w-10 md:h-10"
+                  }`}
+                />
+                <span
+                  className={`font-semibold tracking-wide transition-all duration-500 ${
+                    scrolled
+                      ? "text-white text-sm md:text-base"
+                      : "text-white text-lg drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]"
+                  }`}
+                >
+                  Emirates Heritage
+                </span>
+              </Link>
 
-        {/* Mobile Menu Icon */}
-        <div
-          className="md:hidden text-white text-3xl cursor-pointer z-50 relative"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? <HiX /> : <HiMenu />}
+              {/* ── Desktop Links ── */}
+              <div className="hidden md:flex items-center gap-1">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.hash ? `/#${item.hash}` : item.path}
+                    onClick={() => handleNavClick(item)}
+                    className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                      scrolled
+                        ? isActive(item)
+                          ? "text-[#37C2CF] font-semibold"
+                          : "text-white hover:text-white"
+                        : isActive(item)
+                        ? "text-white font-semibold"
+                        : "text-white hover:text-white"
+                    }`}
+                  >
+                    {item.name}
+
+                    {/* Active dot indicator */}
+                    {isActive(item) && (
+                      <motion.span
+                        layoutId="navDot"
+                        className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full ${
+                          scrolled ? "bg-[#37C2CF]" : "bg-white"
+                        }`}
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      />
+                    )}
+                  </Link>
+                ))}
+
+                {/* CTA Button */}
+                <div className={`ml-3 ${scrolled ? "" : ""}`}>
+                  <Link
+                    to="/contact"
+                    className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+                      scrolled
+                        ? "bg-[#37C2CF] text-white shadow-lg shadow-[#37C2CF]/25 hover:shadow-xl hover:shadow-[#37C2CF]/35 hover:bg-[#2eb3bf]"
+                        : "bg-white/15 text-white backdrop-blur-sm border border-white/20 hover:bg-white/25"
+                    }`}
+                  >
+                    Get a Quote
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3.5 h-3.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+
+              {/* ── Mobile Toggle ── */}
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className={`md:hidden w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300 ${
+                  scrolled
+                    ? "text-white hover:bg-white/10"
+                    : "text-white hover:bg-white/10"
+                }`}
+                aria-label="Toggle menu"
+              >
+                <HiMenuAlt3 size={22} />
+              </button>
+            </div>
+          </nav>
         </div>
-      </div>
+      </motion.header>
 
-      {/* Mobile Menu Overlay */}
+      {/* ===== MOBILE DRAWER ===== */}
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Dark Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.5 }}
+              animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black z-40"
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-60"
               onClick={() => setIsOpen(false)}
             />
 
-            {/* Drawer Menu */}
             <motion.div
               initial="closed"
               animate="open"
               exit="closed"
               variants={menuVariants}
-              className="fixed top-0 right-0 w-[85%] sm:w-[50%] h-screen bg-[#37C2CF] z-50 flex flex-col shadow-2xl"
+              className="fixed top-0 right-0 w-[80%] sm:w-[55%] h-screen z-70 
+                bg-[#fafafa] shadow-[-20px_0_60px_rgba(0,0,0,0.15)]"
             >
-              {/* --- NEW: Header with Logo, Name & Close Button --- */}
-              <div className="flex items-center justify-between px-6 pt-6 mb-4">
-                {/* Logo & Name */}
+              {/* Header */}
+              <div className="flex items-center justify-between px-6 pt-6 pb-4">
                 <div className="flex items-center gap-3">
-                  {/* Ensure /logo.png exists in your public folder */}
-                  <img
-                    src="/logo.png"
-                    alt="Logo"
-                    className="w-8 h-8 object-contain bg-white p-1"
-                  />
-                  <span className="text-white  font-semibold text-lg leading-none">
-                    Emirates  Heritage
+                  <img src={Logo} alt="Logo" className="w-8 h-8 object-contain" />
+                  <span className="text-gray-800 font-semibold text-base">
+                    Emirates Heritage
                   </span>
                 </div>
-
-                {/* Close Button (X) */}
                 <button
-                  onClick={() => setIsOpen(false)} // Replace 'setIsOpen(false)' with your actual close function
-                  className="text-white p-2 hover:bg-white/20 rounded-full transition-colors"
+                  onClick={() => setIsOpen(false)}
+                  className="w-9 h-9 rounded-xl bg-gray-100 flex items-center justify-center text-gray-400 hover:text-gray-700 hover:bg-gray-200 transition-all"
+                  aria-label="Close menu"
                 >
-                  {/* Simple SVG X Icon */}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2.5}
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                   </svg>
                 </button>
               </div>
 
-              {/* --- Navigation Items --- */}
-              {/* Removed 'bg-red-400' and adjusted margin-top */}
-              <div className="flex flex-col h-full px-6 mt-4 space-y-6 relative z-10">
+              <div className="w-full h-px bg-gray-100 mb-2"></div>
+
+              {/* Links */}
+              <div className="flex flex-col px-4 space-y-1 mt-2">
                 {navItems.map((item) => (
                   <motion.div key={item.name} variants={linkVariants}>
-                    <button
-                      onClick={() => {
-                        scrollToSection(item.id);
-                        setIsOpen(false); // Also close menu when a link is clicked
-                      }}
-                      className="text-2xl font-medium text-white hover:text-yellow-300 transition-colors duration-300 text-left w-full"
+                    <Link
+                      to={item.hash ? `/#${item.hash}` : item.path}
+                      onClick={() => handleNavClick(item)}
+                      className={`flex items-center gap-3 px-4 py-3.5 rounded-xl text-[15px] font-medium transition-all duration-200 ${
+                        isActive(item)
+                          ? "bg-[#37C2CF]/10 text-[#37C2CF]"
+                          : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                      }`}
                     >
                       {item.name}
-                    </button>
+                      {isActive(item) && (
+                        <span className="ml-auto w-1.5 h-1.5 rounded-full bg-[#37C2CF]"></span>
+                      )}
+                    </Link>
                   </motion.div>
                 ))}
+              </div>
+
+              {/* CTA */}
+              <div className="px-6 mt-6">
+                <motion.div variants={linkVariants}>
+                  <Link
+                    to="/contact"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center justify-center gap-2 w-full bg-[#37C2CF] text-white px-6 py-3.5 rounded-xl font-semibold text-[15px]
+                      shadow-lg shadow-[#37C2CF]/20 hover:shadow-xl hover:shadow-[#37C2CF]/30
+                      hover:bg-[#2eb3bf] transition-all duration-300"
+                  >
+                    Get a Quote
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
+                  </Link>
+                </motion.div>
+              </div>
+
+              {/* Bottom contact */}
+              <div className="absolute bottom-0 left-0 right-0 px-6 pb-8">
+                <div className="h-px bg-gray-100 mb-5"></div>
+                <div className="space-y-3">
+                  <a href="tel:+971503195090" className="flex items-center gap-3 text-gray-400 hover:text-gray-700 transition-colors">
+                    <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                      </svg>
+                    </div>
+                    <span className="text-sm">+971 50 319 5090</span>
+                  </a>
+                  <a href="mailto:EmiratesHeritage@gmail.com" className="flex items-center gap-3 text-gray-400 hover:text-gray-700 transition-colors">
+                    <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                      </svg>
+                    </div>
+                    <span className="text-sm">EmiratesHeritage@gmail.com</span>
+                  </a>
+                </div>
               </div>
             </motion.div>
           </>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 };
 

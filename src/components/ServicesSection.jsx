@@ -78,7 +78,7 @@ const ServicesSection = () => {
   return (
     <section
       id="service"
-      className="py-10 md:py-20 px-4 md:px-10 max-w-7xl mx-auto relative overflow-hidden"
+      className="py-10  px-4 md:px-10 max-w-7xl mx-auto relative overflow-hidden"
     >
       {/* Parallax Background Glow */}
       <motion.div
@@ -88,20 +88,13 @@ const ServicesSection = () => {
         className="absolute inset-0"
       ></motion.div>
 
-      {/* Heading */}
+      {/* Heading — only shown when not on dedicated services page */}
       <motion.div
         initial={{ opacity: 0, y: -20, filter: "blur(4px)" }}
         whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
         transition={{ duration: 1 }}
         className="text-center max-w-3xl mx-auto mb-8 relative"
       >
-        <h1 className="text-3xl md:text-5xl font-bold text-slate-900">
-          Our Services
-        </h1>
-        <p className="mt-4 text-sm md:text-base text-gray-600 leading-relaxed">
-          Full-Scope Construction & Property Solutions. We design, build, and
-          maintain everything from Villas to Warehouses.
-        </p>
       </motion.div>
 
       {/*  DESKTOP VIEW (Grid + Tilt) - Hidden on Mobile*/}

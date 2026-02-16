@@ -34,7 +34,7 @@ const categories = {
   },
 };
 const AboutUs = () => {
-  const [activeTab, setActiveTab] = useState("Commercial");
+  const [activeTab, setActiveTab] = useState("Residential");
 
   const current = categories[activeTab];
 

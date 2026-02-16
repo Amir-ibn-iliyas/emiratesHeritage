@@ -1,15 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
   Facebook,
   Twitter,
   Phone,
   Mail,
   MapPin,
-  Link as LinkIcon,
-  MessageCircle,
   Instagram,
-  Link,
 } from "lucide-react";
 
 const Footer = () => {
@@ -85,15 +83,15 @@ const Footer = () => {
           >
             <motion.div variants={fadeUp}>
               <h3 className="font-bold text-lg text-black mb-2">Explore</h3>
-              <FooterLink text="About Us" id="home" />
-              <FooterLink text="Gallery" id="gallery" />
+              <FooterLink text="About Us" to="/#about" />
+              <FooterLink text="Gallery" to="/#gallery" />
             </motion.div>
 
             <motion.div variants={fadeUp}>
               <h3 className="font-bold text-lg text-black mb-2">Quick Links</h3>
-              <FooterLink text="Services" id="service" />
-              <FooterLink text="Contact Us" id="contact" />
-              <FooterLink text="Service Request" id="contact" />
+              <FooterLink text="Services" to="/services" />
+              <FooterLink text="Contact Us" to="/contact" />
+              <FooterLink text="Get a Quote" to="/contact" />
             </motion.div>
           </motion.div>
         </div>
@@ -200,22 +198,19 @@ const SocialIcon = ({ icon, link }) => (
 );
 
 /* ---------- FOOTER LINK + LINE DRAW ---------- */
-const FooterLink = ({ text, id }) => (
-  <motion.a
-    href={`#${id}`}
+const FooterLink = ({ text, to }) => (
+  <motion.div
     variants={fadeUp}
-    className="relative flex flex-col text-slate-800 font-medium hover:text-black"
     whileHover={{ x: 4 }}
     transition={{ duration: 0.2 }}
   >
-    {text}
-
-    <motion.span
-      className="absolute left-0 bottom-0 h-[2px] bg-black scale-x-0 origin-left"
-      whileHover={{ scaleX: 1 }}
-      transition={{ duration: 0.3 }}
-    />
-  </motion.a>
+    <Link
+      to={to}
+      className="relative flex flex-col text-slate-800 font-medium hover:text-black"
+    >
+      {text}
+    </Link>
+  </motion.div>
 );
 
 /* ---------- CONTACT ITEM ---------- */

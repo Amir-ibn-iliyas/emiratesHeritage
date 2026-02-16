@@ -35,22 +35,9 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className=" pb-10 overflow-hidden">
+    <section id="contact" className="pt-10 pb-10 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* --- Title --- */}
-        <motion.div
-          variants={fadeIn}
-          initial="hidden"
-          whileInView="visible"
-          className="text-center mb-5"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 leading-tight">
-            Contact Us
-          </h1>
-          <p className="mt-1 text-lg text-slate-600 max-w-2xl mx-auto">
-            Ready to start your project? We're here to help!
-          </p>
-        </motion.div>
+        {/* Title provided by page-level header */}
 
         <div className="  flex flex-col h-full  md:flex-row gap-3 lg:gap-12  md:px-20 lg:px-0 items-center">
           {/* --- Left Column: Contact Form --- */}
