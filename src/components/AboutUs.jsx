@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import commercialImg from "../assets/images/commercial.webp";
 import residentialImg from "../assets/images/resisdential.webp";
 import industrialImg from "../assets/images/industrial.webp";
-import provideLeftImg from "../assets/images/provideleft.webp";
+import provideLeftImg from "../assets/images/featleft.webp";
 import provideBgImg from "../assets/images/provide.webp";
 
 const categoryImages = {
@@ -32,10 +32,10 @@ const AboutUs = () => {
           viewport={{ amount: 0.3 }}
           className="flex flex-col items-center text-center"
         >
-          <h1 className="text-xl md:text-4xl lg:text-5xl font-bold">
+          <h1 className="text-xl md:text-4xl text-black/80 lg:text-5xl font-bold">
             {t("about.title")}
           </h1>
-          <p className="text-[10px] px-4 md:px-0 md:text-[16px] mt-3 md:w-3/4 lg:w-1/2">
+          <p className="text-[10px] text-black/70 px-4 md:px-0 md:text-[16px] mt-3 md:w-3/4 lg:w-1/2">
             {t("about.subtitle")}
           </p>
         </motion.div>
@@ -66,7 +66,7 @@ const AboutUs = () => {
               variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`flex cursor-pointer items-center gap-2 border px-2 md:px-4 py-2 rounded-md text-sm md:text-base transition 
+              className={`flex cursor-pointer text-black/80 items-center gap-2 border px-2 md:px-4 py-2 rounded-md text-sm md:text-base transition 
         ${
           activeTab === item.label
             ? "bg-black text-white shadow-md"
@@ -121,7 +121,7 @@ const AboutUs = () => {
               hidden: {},
               visible: { transition: { staggerChildren: 0.2 } },
             }}
-            className="w-full md:w-1/2 lg:w-2/3  flex flex-col gap-2 mt-4 justify-center md:mt-0"
+            className="w-full md:w-1/2 lg:w-2/3 text-black/80  flex flex-col gap-2 mt-4 justify-center md:mt-0"
           >
             <motion.h2
               variants={{
@@ -191,7 +191,7 @@ const AboutUs = () => {
             </div>
 
             {/* RIGHT CONTENT */}
-            <div className="w-full  rounded-md md:w-2/3 bg-black/40 text-white p-2 lg:p-10 flex flex-col gap-4">
+            <div className="w-full  rounded-md md:w-2/3 bg-black/40 text-white/70 p-2 lg:p-10 flex flex-col gap-4">
               <h2 className="text-2xl md:text-4xl font-bold text-[#37C2CF]">
                 {t("provide.title")}
               </h2>

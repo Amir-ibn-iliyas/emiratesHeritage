@@ -5,8 +5,8 @@ import { useTranslation } from "react-i18next";
 import leftTopImg from '../assets/images/commercial.webp';
 import leftBottomImg from '../assets/images/industrial.webp';
 import centerImg from '../assets/images/heroImage.webp';
-import rightTopImg from '../assets/images/industrial.webp';
-import rightBottomImg from '../assets/images/industrial.webp';
+import rightTopImg from '../assets/images/emirategalleryconst.webp';
+import rightBottomImg from '../assets/images/gallimg2.webp';
 
 const Gallery = () => {
   const [width, setWidth] = useState(0);
