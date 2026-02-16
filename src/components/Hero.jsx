@@ -116,14 +116,14 @@ const Hero = () => {
         src="/heroImage2.webp"
         fetchPriority="high"
         alt="Heritage Background"
-        className={`absolute inset-0 w-full h-[120%] -top-[10%] object-cover object-left transition-opacity duration-700 ${
+        className={`absolute inset-0 w-full h-full object-cover object-left transition-opacity duration-700 ${
           isLoaded ? "opacity-100" : "opacity-0"
         }`}
         onLoad={() => setIsLoaded(true)}
       />
 
       {/* ── Gradient Overlay ── */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 md:bg-gradient-to-l md:from-black/90 md:via-black/45 md:to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/40 to-black/10 md:bg-gradient-to-l md:from-black/60 md:via-black/45 md:to-transparent" />
 
       {/* ── Vignette ── */}
       <div className="absolute inset-0 shadow-[inset_0_0_120px_rgba(0,0,0,0.4)]" />
