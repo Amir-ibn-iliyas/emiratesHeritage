@@ -172,14 +172,14 @@ const AboutUs = () => {
             >
               {current.desc2}
             </motion.p>
-
+{/* 
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-[#37C2CF] hover:bg-[#32b4c0] cursor-pointer text-black px-6 py-2 w-fit mt-4 rounded-md"
             >
               Read More
-            </motion.button>
+            </motion.button> */}
           </motion.div>
         </motion.div>
       </section>

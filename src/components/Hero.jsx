@@ -7,7 +7,7 @@ const Hero = () => {
     <>
      <section
         id="home"
-        className="relative h-[50vh] md:h-[50vh] lg:h-[90vh] overflow-hidden bg-gray-900" 
+        className="relative h-[50vh] lg:h-[100vh] overflow-hidden bg-gray-900" 
       >
         
         <img

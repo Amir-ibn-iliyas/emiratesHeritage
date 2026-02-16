@@ -98,14 +98,14 @@ const Navbar = () => {
         <div
           className={`transition-all duration-500 ease-out ${
             scrolled
-              ? "px-4 md:px-8 lg:px-16 pt-3"
+              ? "px-4 md:px-8 lg:px-16 pt-1"
               : "px-0 pt-0"
           }`}
         >
           <nav
             className={`mx-auto transition-all duration-500 ease-out ${
               scrolled
-                ? "max-w-5xl rounded-2xl bg-black/25 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)]  "
+                ? "max-w-5xl rounded-full bg-black/25 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)]  "
                 : "max-w-full bg-transparent"
             }`}
           >
