@@ -4,6 +4,7 @@ import MainLayout from "./layout/MainLayout";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
+import GalleryPage from "./pages/GalleryPage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path="services" element={<Services />} />
+          <Route path="gallery" element={<GalleryPage />} />
           <Route path="contact" element={<Contact />} />
         </Route>
       </Routes>

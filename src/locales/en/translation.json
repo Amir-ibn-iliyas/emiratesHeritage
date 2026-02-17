@@ -50,7 +50,42 @@
   },
   "gallery": {
     "title": "Our Gallery",
-    "subtitle": "A closer look at our craftsmanship, engineering, and design excellence."
+    "subtitle": "A closer look at our craftsmanship, engineering, and design excellence.",
+    "pageTitle": "Our Projects",
+    "pageSubtitle": "Discover our portfolio of completed projects across the UAE.",
+    "statYears": "Years",
+    "statProjects": "Projects",
+    "statEmirates": "Emirates",
+    "filters": {
+      "all": "All",
+      "residential": "Residential",
+      "commercial": "Commercial",
+      "industrial": "Industrial",
+      "villa": "Villa",
+      "renovation": "Renovation"
+    },
+    "viewProject": "View",
+    "loadMore": "Load More Projects",
+    "cta": {
+      "title": "Like what you see?",
+      "subtitle": "Let's bring your vision to life.",
+      "button": "Get a Quote"
+    },
+    "close": "Close",
+    "projects": {
+      "p1": { "name": "Modern Office Tower", "location": "Abu Dhabi, UAE" },
+      "p2": { "name": "Family Residence", "location": "Abu Dhabi, UAE" },
+      "p3": { "name": "Industrial Complex", "location": "Al Ain, UAE" },
+      "p4": { "name": "Heritage Villa", "location": "Abu Dhabi, UAE" },
+      "p5": { "name": "Commercial Plaza", "location": "Dubai, UAE" },
+      "p6": { "name": "Luxury Villa", "location": "Abu Dhabi, UAE" },
+      "p7": { "name": "Office Renovation", "location": "Abu Dhabi, UAE" },
+      "p8": { "name": "Business Center", "location": "Abu Dhabi, UAE" },
+      "p9": { "name": "Infrastructure Hub", "location": "Abu Dhabi, UAE" },
+      "p10": { "name": "Heritage Building", "location": "Sharjah, UAE" },
+      "p11": { "name": "Residential Complex", "location": "Al Ain, UAE" },
+      "p12": { "name": "Premium Villa", "location": "Abu Dhabi, UAE" }
+    }
   },
   "services": {
     "pageTitle": "Our Services",
