@@ -163,18 +163,18 @@ const Hero = () => {
       const getLines = (ref) => ref.current?.querySelectorAll(".mask-line") || [];
 
       /* ═══════════════════════════════════════════════
-         ACT 1: "You Dream" — LEFT SIDE
-         Time-based entrance (visible on load, no scroll needed)
+         ACT 1: "Your Dream" — LEFT SIDE
+         Time-based entrance + scroll-based exit
+         
+         Timeline:
+         • On load (0.4s delay): lines slide up into view
+         • 12-16%: lines slide out upward
+         • 16-17%: container fades out
          ═══════════════════════════════════════════════ */
 
       // Time-based entrance — plays automatically after mount
-      // (preloader covers the view, so user sees the result when strips open)
       const act1Enter = gsap.timeline({ delay: 0.4 });
-
-      // Container fade-in (instant)
       act1Enter.set(act1Ref.current, { opacity: 1 });
-
-      // Lines mask-reveal (staggered slide-up)
       act1Enter.fromTo(getLines(act1Ref),
         { y: "110%", rotateX: 8 },
         {
@@ -186,7 +186,7 @@ const Hero = () => {
         }
       );
 
-      // Lines exit (explicit fromTo so scroll-back reversal works correctly)
+      // Lines exit — fromTo ensures clean reversal on scroll-back
       gsap.fromTo(getLines(act1Ref),
         { y: "0%", rotateX: 0 },
         {
@@ -203,12 +203,11 @@ const Hero = () => {
         }
       );
 
-      // Container fade-out (explicit fromTo for reversal)
+      // Container fade-out
       gsap.fromTo(act1Ref.current,
         { opacity: 1 },
         {
           opacity: 0,
-          duration: 0.01,
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "18% top",
@@ -220,7 +219,14 @@ const Hero = () => {
 
       /* ═══════════════════════════════════════════════
          ACT 2: "We Build" — RIGHT SIDE
-         Mask reveal with stagger
+         All fromTo for clean scroll reversal
+         
+         Timeline:
+         • 17-18%: container fades in
+         • 18-24%: lines slide up into view
+         • 24-34%: visible (breathing room)
+         • 34-38%: lines slide out upward
+         • 38-39%: container fades out
          ═══════════════════════════════════════════════ */
 
       // Container fade-in
@@ -228,11 +234,10 @@ const Hero = () => {
         { opacity: 0 },
         {
           opacity: 1,
-          duration: 0.01,
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "18% top",
-            end: "19% top",
+            start: "17% top",
+            end: "18% top",
             scrub: true,
           },
         }
@@ -248,43 +253,52 @@ const Hero = () => {
           stagger: 0.15,
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "24% top",
-            end: "28% top",
+            start: "18% top",
+            end: "24% top",
             scrub: true,
           },
         }
       );
 
-      // Lines exit
-      gsap.to(getLines(act2Ref), {
-        y: "-110%",
-        rotateX: -5,
-        ease: "power2.in",
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "26% top",
-          end: "20% top",
-          scrub: true,
-        },
-      });
+      // Lines exit — fromTo for proper reversal
+      gsap.fromTo(getLines(act2Ref),
+        { y: "0%", rotateX: 0 },
+        {
+          y: "-110%",
+          rotateX: -5,
+          ease: "power2.in",
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "34% top",
+            end: "40% top",
+            scrub: true,
+          },
+        }
+      );
 
       // Container fade-out
-      gsap.to(act2Ref.current, {
-        opacity: 0,
-        duration: 0.01,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "28% top",
-          end: "30% top",
-          scrub: true,
-        },
-      });
+      gsap.fromTo(act2Ref.current,
+        { opacity: 1 },
+        {
+          opacity: 0,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "41% top",
+            end: "42% top",
+            scrub: true,
+          },
+        }
+      );
 
       /* ═══════════════════════════════════════════════
          ACT 3: "Emirates Heritage" — CENTER-BOTTOM
          Grand reveal, stays visible as final state
-         Staggered mask-reveal for each element
+         
+         Timeline:
+         • 39-40%: container fades in
+         • 40-48%: lines slide up (staggered reveal)
+         • 48-100%: stays visible (final state)
          ═══════════════════════════════════════════════ */
 
       // Container fade-in
@@ -292,17 +306,16 @@ const Hero = () => {
         { opacity: 0 },
         {
           opacity: 1,
-          duration: 0.01,
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "28% top",
-            end: "29% top",
+            start: "39% top",
+            end: "40% top",
             scrub: true,
           },
         }
       );
 
-      // Lines reveal (staggered — accent, brand, tagline, buttons)
+      // Lines reveal (staggered)
       gsap.fromTo(getLines(act3Ref),
         { y: "110%", rotateX: 8 },
         {
@@ -312,8 +325,8 @@ const Hero = () => {
           stagger: 0.12,
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "30% top",
-            end: "32% top",
+            start: "40% top",
+            end: "48% top",
             scrub: true,
           },
         }
@@ -322,17 +335,20 @@ const Hero = () => {
       // Act 3 stays visible — no exit animation (final state)
 
       /* ── Scroll indicator fade-out ── */
-      gsap.to(scrollIndicatorRef.current, {
-        opacity: 0,
-        y: 10,
-        ease: "power2.in",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "3% top",
-          scrub: true,
-        },
-      });
+      gsap.fromTo(scrollIndicatorRef.current,
+        { opacity: 1, y: 0 },
+        {
+          opacity: 0,
+          y: 10,
+          ease: "power2.in",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "3% top",
+            scrub: true,
+          },
+        }
+      );
 
     }, sectionRef);
 
@@ -431,7 +447,7 @@ const Hero = () => {
     <section
       ref={sectionRef}
       id="home"
-      className="relative z-0 h-[340vh] bg-[#0a1628]"
+      className="relative z-0 h-[500vh] bg-[#0a1628]"
     >
       <div
         ref={stickyRef}
