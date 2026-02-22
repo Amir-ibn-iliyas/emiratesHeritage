@@ -208,6 +208,7 @@ const Hero = () => {
         { opacity: 1 },
         {
           opacity: 0,
+          immediateRender: false,
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "18% top",
@@ -229,11 +230,11 @@ const Hero = () => {
          • 38-39%: container fades out
          ═══════════════════════════════════════════════ */
 
-      // Container fade-in
+      // Container fade-in (autoAlpha = opacity + visibility)
       gsap.fromTo(act2Ref.current,
-        { opacity: 0 },
+        { autoAlpha: 0 },
         {
-          opacity: 1,
+          autoAlpha: 1,
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "17% top",
@@ -268,6 +269,7 @@ const Hero = () => {
           rotateX: -5,
           ease: "power2.in",
           stagger: 0.1,
+          immediateRender: false,
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "34% top",
@@ -279,9 +281,10 @@ const Hero = () => {
 
       // Container fade-out
       gsap.fromTo(act2Ref.current,
-        { opacity: 1 },
+        { autoAlpha: 1 },
         {
-          opacity: 0,
+          autoAlpha: 0,
+          immediateRender: false,
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "41% top",
@@ -301,15 +304,15 @@ const Hero = () => {
          • 48-100%: stays visible (final state)
          ═══════════════════════════════════════════════ */
 
-      // Container fade-in
+      // Container fade-in (autoAlpha = opacity + visibility)
       gsap.fromTo(act3Ref.current,
-        { opacity: 0 },
+        { autoAlpha: 0 },
         {
-          opacity: 1,
+          autoAlpha: 1,
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "39% top",
-            end: "40% top",
+            start: "42% top",
+            end: "43% top",
             scrub: true,
           },
         }
@@ -537,7 +540,7 @@ const Hero = () => {
         <div
           ref={act2Ref}
           className="absolute inset-0 z-10 flex items-center justify-end px-5 sm:px-10 lg:px-20"
-          style={{ opacity: 0 }}
+          style={{ opacity: 0, visibility: "hidden" }}
         >
           <div className="text-right" style={{ perspective: "800px" }}>
             {/* Line 1: Accent */}
@@ -579,7 +582,7 @@ const Hero = () => {
         <div
           ref={act3Ref}
           className="absolute inset-0 z-10 flex flex-col items-center justify-end pb-10 text-center px-5 sm:px-8"
-          style={{ opacity: 0 }}
+          style={{ opacity: 0, visibility: "hidden" }}
         >
           <div className="flex flex-col items-center" style={{ perspective: "800px" }}>
             {/* Line 1: Accent */}
