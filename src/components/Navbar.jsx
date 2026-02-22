@@ -32,9 +32,17 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      const vh100 = window.innerHeight; // Threshold after 100vh overlap
+      const vh100 = window.innerHeight;
+
+      // Hide on scroll down, show on scroll up
+      if (currentScrollY > lastScrollY.current && currentScrollY > 120) {
+        setVisible(false);
+      } else {
+        setVisible(true);
+      }
+
       setScrolled(currentScrollY > 60);
-      setIsDarkSection(currentScrollY > vh100 - 80); 
+      setIsDarkSection(currentScrollY > vh100 - 80);
       lastScrollY.current = currentScrollY;
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
