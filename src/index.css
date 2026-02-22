@@ -10,3 +10,15 @@
 html[lang="ar"] body {
   font-family: "Tajawal", sans-serif;
 }
+
+/* ── Scroll indicator dot animation ── */
+@keyframes scrollDotTravel {
+  0%   { top: 0;               opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { top: calc(100% - 3px); opacity: 0; }
+}
+
+.scroll-dot {
+  animation: scrollDotTravel 1.8s ease-in-out infinite;
+}

@@ -1,4 +1,10 @@
 {
+  "preloader": {
+    "phase1": "Your Dream.",
+    "phase2": "We Build.",
+    "phase3": "Emirates Heritage",
+    "tagline": "Professional Quality. Effortless Service."
+  },
   "nav": {
     "home": "Home",
     "about": "About Us",
@@ -14,7 +20,13 @@
     "stat1": "Years",
     "stat2": "Projects",
     "stat3": "Abu Dhabi, UAE",
-    "scroll": "Scroll to explore"
+    "scroll": "Scroll to explore",
+    "act1Title": "Your Dream",
+    "act1Sub": "Every masterpiece begins with a Dream",
+    "act2Title": "We Build",
+    "act2Sub": "Turning blueprints into reality",
+    "act3Brand": "Emirates Heritage",
+    "act3Tagline": "Professional Quality. Effortless Service."
   },
   "about": {
     "title": "Focus on Expertise and Full Scope",

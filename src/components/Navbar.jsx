@@ -9,12 +9,13 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [visible, setVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
+  const [isDarkSection, setIsDarkSection] = useState(false);
   const lastScrollY = useRef(0);
   const location = useLocation();
   const { t, i18n } = useTranslation();
 
   const isArabic = i18n.language === "ar";
-
+  
   // Toggle language
   const toggleLanguage = () => {
     const newLang = isArabic ? "en" : "ar";
@@ -31,12 +32,9 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      if (currentScrollY > lastScrollY.current && currentScrollY > 120) {
-        setVisible(false);
-      } else {
-        setVisible(true);
-      }
+      const vh100 = window.innerHeight; // Threshold after 100vh overlap
       setScrolled(currentScrollY > 60);
+      setIsDarkSection(currentScrollY > vh100 - 80); 
       lastScrollY.current = currentScrollY;
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -141,7 +139,9 @@ const Navbar = () => {
                 />
                 <span
                   className={`font-semibold tracking-wide transition-all duration-500 ${
-                    scrolled
+                    isDarkSection
+                      ? "text-slate-900 text-sm md:text-base"
+                      : scrolled
                       ? "text-white text-sm md:text-base"
                       : "text-white text-lg drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]"
                   }`}
@@ -160,7 +160,11 @@ const Navbar = () => {
                       to={item.hash ? `/#${item.hash}` : item.path}
                       onClick={() => handleNavClick(item)}
                       className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                        scrolled
+                        isDarkSection
+                          ? isActive(item)
+                            ? "text-[#37C2CF]"
+                            : "text-slate-700 hover:text-black"
+                          : scrolled
                           ? isActive(item)
                             ? "text-[#37C2CF] font-semibold"
                             : "text-white hover:text-white"
@@ -176,7 +180,7 @@ const Navbar = () => {
                         <motion.span
                           layoutId="navDot"
                           className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full ${
-                            scrolled ? "bg-[#37C2CF]" : "bg-white"
+                            isDarkSection ? "bg-[#37C2CF]" : scrolled ? "bg-[#37C2CF]" : "bg-white"
                           }`}
                           transition={{ type: "spring", stiffness: 300, damping: 30 }}
                         />
@@ -189,7 +193,9 @@ const Navbar = () => {
                     <Link
                       to="/contact"
                       className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
-                        scrolled
+                        isDarkSection
+                          ? "bg-slate-900 text-white shadow-lg shadow-black/10 hover:bg-black"
+                          : scrolled
                           ? "bg-[#37C2CF] text-white shadow-lg shadow-[#37C2CF]/25 hover:shadow-xl hover:shadow-[#37C2CF]/35 hover:bg-[#2eb3bf]"
                           : "bg-white/15 text-white backdrop-blur-sm border border-white/20 hover:bg-white/25"
                       }`}
@@ -205,7 +211,11 @@ const Navbar = () => {
                 {/* Language Toggle (always visible) */}
                 <button
                   onClick={toggleLanguage}
-                  className="px-5 py-1 ml-2 rounded-full text-lg font-semibold text-white border border-white/15 hover:border-white/30 hover:bg-white/10 transition-all duration-300 cursor-pointer"
+                  className={`px-5 py-1 ml-2 rounded-full text-lg font-semibold transition-all duration-300 cursor-pointer ${
+                    isDarkSection
+                      ? "text-slate-700 border-slate-200 hover:border-slate-400 hover:bg-slate-50"
+                      : "text-white border-white/15 hover:border-white/30 hover:bg-white/10"
+                  }`}
                 >
                   {isArabic ? "ENG" : "عربي"}
                 </button>
@@ -214,8 +224,8 @@ const Navbar = () => {
                 <button
                   onClick={() => setIsOpen(!isOpen)}
                   className={`md:hidden w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300 ${
-                    scrolled
-                      ? "text-white hover:bg-white/10"
+                    isDarkSection
+                      ? "text-slate-900 hover:bg-slate-100"
                       : "text-white hover:bg-white/10"
                   }`}
                   aria-label="Toggle menu"
