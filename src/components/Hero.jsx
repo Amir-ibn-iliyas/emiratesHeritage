@@ -454,7 +454,7 @@ const Hero = () => {
     >
       <div
         ref={stickyRef}
-        className="sticky top-0 h-[150lvh] w-full overflow-hidden"
+        className="sticky top-0 h-[100lvh] w-full overflow-hidden"
       >
         {/* ── Canvas ── */}
         <canvas
