@@ -110,51 +110,7 @@ const Services = () => {
         </div>
       </div>
 
-      {/* ─── Bottom CTA ─── */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="max-w-6xl mx-auto px-5 md:px-10 py-20 text-center"
-      >
-        <div className="bg-[#0a1628] rounded-3xl p-10 md:p-16 relative overflow-hidden">
-          {/* Subtle glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-[#37C2CF]/5 blur-[100px] pointer-events-none" />
-
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-2xl md:text-4xl font-bold text-white relative z-10"
-          >
-            {t("services.finale.line1")}
-            <br />
-            <span className="text-[#37C2CF]">
-              {t("services.finale.line2")} {t("services.finale.line3")}
-            </span>
-          </motion.h2>
-
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <Link
-              to="/contact"
-              className="relative z-10 inline-flex items-center gap-2 mt-8 px-8 py-3.5 bg-[#37C2CF] text-white font-semibold rounded-full shadow-lg shadow-[#37C2CF]/25 hover:shadow-xl hover:shadow-[#37C2CF]/40 hover:bg-[#2eb3bf] transition-all duration-300 hover:scale-105 group"
-            >
-              {t("services.finale.cta")}
-              <ArrowRight
-                size={18}
-                className="group-hover:translate-x-1 transition-transform duration-200"
-              />
-            </Link>
-          </motion.div>
-        </div>
-      </motion.div>
+    
     </div>
   );
 };

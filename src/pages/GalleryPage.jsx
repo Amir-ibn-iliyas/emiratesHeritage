@@ -263,25 +263,7 @@ const GalleryPage = () => {
         )}
       </div>
 
-      {/* ─── CTA Section ─── */}
-      <div className="max-w-6xl mx-auto px-5 md:px-10 pb-16">
-        <div className="bg-[#0a1628] rounded-2xl p-8 md:p-12 text-center relative overflow-hidden">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-[3px] bg-[#37C2CF] rounded-full" />
-          <h2 className="text-xl md:text-3xl font-bold text-white mt-2">
-            {t("gallery.cta.title")}
-          </h2>
-          <p className="text-white/35 text-sm md:text-base mt-3 max-w-md mx-auto">
-            {t("gallery.cta.subtitle")}
-          </p>
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-2 mt-6 px-7 py-3.5 bg-[#37C2CF] text-white font-semibold rounded-xl shadow-lg shadow-[#37C2CF]/20 hover:shadow-xl hover:shadow-[#37C2CF]/35 hover:bg-[#2eb3bf] transition-all duration-300 group"
-          >
-            {t("gallery.cta.button")}
-            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-200" />
-          </Link>
-        </div>
-      </div>
+      
 
       {/* ─── Lightbox ─── */}
       {lightbox && (

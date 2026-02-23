@@ -450,7 +450,7 @@ const Hero = () => {
     <section
       ref={sectionRef}
       id="home"
-      className="relative z-0 h-[500vh] bg-[#0a1628]"
+      className="relative z-0 h-[370vh] lg:h-[500vh] bg-[#0a1628]"
     >
       <div
         ref={stickyRef}
@@ -581,7 +581,7 @@ const Hero = () => {
            ═══════════════════════════════════════ */}
         <div
           ref={act3Ref}
-          className="absolute inset-0 z-10 flex flex-col items-center justify-end pb-10 text-center px-5 sm:px-8"
+          className="absolute inset-0 z-10 flex flex-col items-center justify-end pb-30 lg:pb-10 text-center px-5 sm:px-8"
           style={{ opacity: 0, visibility: "hidden" }}
         >
           <div className="flex flex-col items-center" style={{ perspective: "800px" }}>

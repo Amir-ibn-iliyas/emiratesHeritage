@@ -1,6 +1,6 @@
 import React from "react";
 import Hero from "../components/Hero";
-import Gallery from "../components/Gallery";
+// import Gallery from "../components/Gallery";
 import AboutUs from "../components/AboutUs";
 
 const Home = () => {
@@ -8,7 +8,7 @@ const Home = () => {
     <>
       <Hero />
       <AboutUs />
-      <Gallery />
+      {/* <Gallery /> */}
     </>
   );
 };
