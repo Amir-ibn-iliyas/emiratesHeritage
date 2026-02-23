@@ -222,7 +222,7 @@ const Preloader = ({ onComplete }) => {
       <div
         ref={contentRef}
         className="relative z-10 flex flex-col items-center justify-center px-6"
-        style={{ height: "100dvh" }}
+        style={{ height: "110dvh" }}
       >
         {/* Counter */}
         <div className="flex items-baseline select-none">
