@@ -8,9 +8,9 @@ const Chatbot = () => {
 
   const phoneNumber = "971503199090"; 
 
-  // Focus input when opened
+  // Focus input when opened (Desktop only to completely prevent forced mobile keyboard popups)
   useEffect(() => {
-    if (isOpen && inputRef.current) {
+    if (isOpen && inputRef.current && window.innerWidth > 768) {
       inputRef.current.focus();
     }
   }, [isOpen]);
@@ -25,11 +25,11 @@ const Chatbot = () => {
   };
 
   return (
-    <div className="fixed bottom-4 r md:bottom-8 right-4 md:right-8 z-50 flex flex-col items-end">
+    <div className="fixed bottom-4 md:bottom-8 right-4 md:right-8 z-50 flex flex-col items-end">
       
       {/* ─── Chat Window ─── */}
       <div 
-        className={`mb-4 w-[300px] sm:w-[340px] bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 transition-all duration-300 origin-bottom-right ${
+        className={`mb-4 w-[calc(100vw-2rem)] sm:w-[340px] bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 transition-all duration-300 origin-bottom-right ${
           isOpen ? "scale-100 opacity-100" : "scale-50 opacity-0 pointer-events-none"
         }`}
       >
@@ -74,7 +74,8 @@ const Chatbot = () => {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Type your message..."
-            className="flex-1 bg-gray-50 text-sm rounded-full px-4 py-2 outline-none focus:ring-2 focus:ring-[#37C2CF]/20 border border-transparent focus:border-[#37C2CF]/30 transition-all text-slate-700"
+            /* CRITICAL FIX: text-[16px] prevents iOS Safari from auto-zooming the screen when touched! */
+            className="flex-1 bg-gray-50 text-[16px] md:text-sm rounded-full px-4 py-2 outline-none flex-shrink min-w-0 focus:ring-2 focus:ring-[#37C2CF]/20 border border-transparent focus:border-[#37C2CF]/30 transition-all text-slate-700"
           />
           <button 
             type="submit"

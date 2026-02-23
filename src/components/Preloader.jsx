@@ -39,6 +39,7 @@ const Preloader = ({ onComplete }) => {
     displayValue: 0,
     currentPhase: 0,
     exiting: false,
+    exitTriggered: false,
     startTime: Date.now(),
     framesLoaded: 0,
     fontsLoaded: false,
@@ -143,6 +144,12 @@ const Preloader = ({ onComplete }) => {
       img.onload = done;
       img.onerror = done;
       img.src = getFrameSrc(i);
+
+      // PRO PATCH: Force hardware decoding of Frame 0 into GPU memory
+      // so it's instantly available for the Hero canvas to paint.
+      if (i === 0 && "decode" in img) {
+        img.decode().catch(() => {});
+      }
     }
   }, [s]);
 
@@ -179,10 +186,23 @@ const Preloader = ({ onComplete }) => {
 
       // Exit check: real progress done + display caught up + min time passed
       if (s.realProgress >= 100 && val >= 99 && elapsed >= MIN_DISPLAY_MS) {
-        counterEl.textContent = "100";
-        s.displayValue = 100;
-        if (progressFillRef.current) progressFillRef.current.style.width = "100%";
-        playExit();
+        if (!s.exitTriggered) {
+          s.exitTriggered = true;
+          counterEl.textContent = "100";
+          s.displayValue = 100;
+          if (progressFillRef.current) progressFillRef.current.style.width = "100%";
+          
+          /* ══════════════════════════════════════════════════════════════
+             PRO PATCH: "The Extra Sleep" Delay
+             We halt at 100% for an invisible 500ms before sliding the curtains.
+             Because the <Hero /> is mounted underneath, this gives its canvas 
+             the perfect amount of breathing room to pull Frame 0 from cache 
+             and paint it to the screen before the user sees it.
+             ══════════════════════════════════════════════════════════════ */
+          setTimeout(() => {
+            playExit();
+          }, 500);
+        }
         return;
       }
 
@@ -203,7 +223,7 @@ const Preloader = ({ onComplete }) => {
 
   /* ─── Render ─── */
   return (
-    <div className="fixed inset-0 z-200">
+    <div className="fixed inset-0 z-200 ">
       {/* ── Background strips (form solid bg, animate apart on exit) ── */}
       {Array.from({ length: STRIP_COUNT }, (_, i) => (
         <div
@@ -222,7 +242,7 @@ const Preloader = ({ onComplete }) => {
       <div
         ref={contentRef}
         className="relative z-10 flex flex-col items-center justify-center px-6"
-        style={{ height: "110dvh" }}
+        style={{ height: "100dvh" }}
       >
         {/* Counter */}
         <div className="flex items-baseline select-none">
