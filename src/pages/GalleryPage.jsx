@@ -35,7 +35,7 @@ const projects = [
 ];
 
 const FILTERS = ["all", "residential", "commercial", "industrial", "villa", "renovation"];
-const ITEMS_PER_PAGE = 6;
+const getItemsPerPage = () => window.innerWidth < 768 ? 3 : 6;
 
 /* ── Counter Hook ── */
 const useCounter = (target, duration = 1.8, delay = 0.6) => {
@@ -53,7 +53,7 @@ const useCounter = (target, duration = 1.8, delay = 0.6) => {
 const GalleryPage = () => {
   const { t } = useTranslation();
   const [activeFilter, setActiveFilter] = useState("all");
-  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+  const [visibleCount, setVisibleCount] = useState(getItemsPerPage);
   const [lightbox, setLightbox] = useState(null);
   const gridRef = useRef(null);
   const headerRef = useRef(null);
@@ -108,12 +108,12 @@ const GalleryPage = () => {
         duration: 0.2, stagger: 0.03, ease: "power2.in",
         onComplete: () => {
           setActiveFilter(cat);
-          setVisibleCount(ITEMS_PER_PAGE);
+          setVisibleCount(getItemsPerPage());
         },
       });
     } else {
       setActiveFilter(cat);
-      setVisibleCount(ITEMS_PER_PAGE);
+      setVisibleCount(getItemsPerPage());
     }
   }, [activeFilter]);
 
@@ -253,7 +253,7 @@ const GalleryPage = () => {
         {hasMore && (
           <div className="flex justify-center mt-8">
             <button
-              onClick={() => setVisibleCount((v) => v + ITEMS_PER_PAGE)}
+              onClick={() => setVisibleCount((v) => v + getItemsPerPage())}
               className="group px-6 py-3 rounded-xl bg-white border border-gray-100 text-slate-700 font-semibold text-sm hover:border-[#37C2CF]/20 hover:text-[#37C2CF] hover:shadow-lg hover:shadow-[#37C2CF]/5 transition-all duration-300 flex items-center gap-2 cursor-pointer"
             >
               {t("gallery.loadMore")}
