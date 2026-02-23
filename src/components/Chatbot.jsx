@@ -75,7 +75,7 @@ const Chatbot = () => {
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Type your message..."
             /* CRITICAL FIX: text-[16px] prevents iOS Safari from auto-zooming the screen when touched! */
-            className="flex-1 bg-gray-50 text-[16px] md:text-sm rounded-full px-4 py-2 outline-none flex-shrink min-w-0 focus:ring-2 focus:ring-[#37C2CF]/20 border border-transparent focus:border-[#37C2CF]/30 transition-all text-slate-700"
+            className="flex-1 bg-gray-50 text-[16px] md:text-sm rounded-full px-4 py-2 outline-none shrink min-w-0 focus:ring-2 focus:ring-[#37C2CF]/20 border border-transparent focus:border-[#37C2CF]/30 transition-all text-slate-700"
           />
           <button 
             type="submit"

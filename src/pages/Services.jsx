@@ -132,14 +132,14 @@ const Services = () => {
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-          className="mx-auto mt-4 h-[3px] w-12 rounded-full bg-[#37C2CF] origin-center"
+          className="mx-auto mt-2 h-[3px] w-12 rounded-full bg-[#37C2CF] origin-center"
         />
 
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-4 text-white/40 text-sm md:text-base max-w-xl mx-auto"
+          className="mt-2 lg:mt-0 text-white/40 text-sm md:text-base max-w-xl mx-auto"
         >
           {t("services.pageSubtitle")}
         </motion.p>

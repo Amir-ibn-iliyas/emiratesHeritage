@@ -58,6 +58,29 @@ const GalleryPage = () => {
   const gridRef = useRef(null);
   const headerRef = useRef(null);
 
+  /* ── Responsive items-per-page: react to viewport changes ── */
+  useEffect(() => {
+    let debounceId;
+    const onResize = () => {
+      clearTimeout(debounceId);
+      debounceId = setTimeout(() => {
+        const nextCount = getItemsPerPage();
+        setVisibleCount((prev) => {
+          // Only reset if the breakpoint actually crossed
+          // and current count matches old breakpoint default
+          const oldDefault = prev <= 3 ? 3 : 6;
+          const newDefault = nextCount;
+          return oldDefault !== newDefault ? newDefault : prev;
+        });
+      }, 150);
+    };
+    window.addEventListener("resize", onResize);
+    return () => {
+      clearTimeout(debounceId);
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
+
   const counter1 = useCounter(15);
   const counter2 = useCounter(100);
   const counter3 = useCounter(3);
@@ -91,6 +114,8 @@ const GalleryPage = () => {
   useEffect(() => {
     if (!gridRef.current) return;
     const cards = gridRef.current.querySelectorAll(".gal-card");
+    // Reset any stale GSAP inline styles before re-animating
+    gsap.set(cards, { clearProps: "opacity,y,scale" });
     gsap.fromTo(cards,
       { opacity: 0, y: 30, scale: 0.97 },
       { opacity: 1, y: 0, scale: 1, duration: 0.45, stagger: 0.06, ease: "power2.out" }
@@ -132,14 +157,14 @@ const GalleryPage = () => {
   return (
     <div className="bg-[#f8fafb] min-h-screen">
       {/* ─── Header ─── */}
-      <div ref={headerRef} className="bg-[#0a1628] pt-20 pb-10 px-6 text-center">
+      <div ref={headerRef} className="bg-[#0a1628] pt-15 lg:pt-10 pb-4 px-6 text-center">
         <div className="gal-accent mx-auto h-[3px] w-12 rounded-full bg-[#37C2CF] origin-center mb-5" />
 
         <h1 className="gal-title text-3xl md:text-5xl font-bold text-white tracking-tight">
           {t("gallery.pageTitle")}
         </h1>
 
-        <p className="gal-sub mt-4 text-white/35 text-sm md:text-base max-w-xl mx-auto">
+        <p className="gal-sub text-white/35 text-sm md:text-base max-w-xl mx-auto">
           {t("gallery.pageSubtitle")}
         </p>
 
