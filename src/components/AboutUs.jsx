@@ -22,7 +22,7 @@ const AboutUs = () => {
   const tabKey = activeTab.toLowerCase(); // "residential", "commercial", "industrial"
 
   return (
-    <div className="relative z-10  bg-white rounded-t-xl md:rounded-t-[2rem] shadow-[0_-20px_60px_rgba(0,0,0,0.3)] -mt-[100vh]">
+    <div className="relative z-10  bg-white rounded-t-xl md:rounded-t-[2rem] shadow-[0_-20px_60px_rgba(0,0,0,0.3)] -mt-[120vh]">
       <section id="about" className="w-screen md:w-full md:px-3 lg:px-10 py-8 pt-10 md:pt-14">
         {/* Heading */}
         <motion.div
