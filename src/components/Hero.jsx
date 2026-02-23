@@ -454,7 +454,7 @@ const Hero = () => {
     >
       <div
         ref={stickyRef}
-        className="sticky top-0 h-screen w-full overflow-hidden"
+        className="sticky top-0 h-[100lvh] w-full overflow-hidden"
       >
         {/* ── Canvas ── */}
         <canvas
@@ -497,7 +497,7 @@ const Hero = () => {
            ═══════════════════════════════════════ */}
         <div
           ref={act1Ref}
-          className="absolute inset-0 z-10 flex items-center px-5 sm:px-10 lg:px-20"
+          className="absolute lg:top-0 -top-40 inset-0 z-10 flex items-center px-5 sm:px-10 lg:px-20"
           style={{ opacity: 0 }}
         >
           <div style={{ perspective: "800px" }}>
