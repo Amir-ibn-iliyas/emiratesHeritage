@@ -187,5 +187,12 @@
   },
   "footer": {
     "tagline": "Building Excellence Since Day One"
+  },
+  "chatbot": {
+    "defaultText": "I want some enquiry on your services",
+    "tooltip": "Need help? Chat with us",
+    "typicallyReplies": "Typically replies instantly",
+    "greeting": "Hi there! 👋<br/><br/>How can we help you with your next construction or design project?",
+    "placeholder": "Type your message..."
   }
 }

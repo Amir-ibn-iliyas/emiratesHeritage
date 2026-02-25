@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { MessageSquare, X, Send } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
   const inputRef = useRef(null);
+  const { t, i18n } = useTranslation();
 
   const phoneNumber = "971503199090"; 
 
@@ -17,7 +19,7 @@ const Chatbot = () => {
 
   const handleSend = (e) => {
     e.preventDefault();
-    const finalMessage = message.trim() || "I want some enquiry on your services";
+    const finalMessage = message.trim() || t("chatbot.defaultText");
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(finalMessage)}`;
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
     setIsOpen(false);
@@ -45,7 +47,7 @@ const Chatbot = () => {
               <h3 className="text-white font-bold text-sm">Emirates Heritage</h3>
               <p className="text-[#37C2CF] text-xs flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#37C2CF] animate-pulse"></span>
-                Typically replies instantly
+                {t("chatbot.typicallyReplies")}
               </p>
             </div>
           </div>
@@ -59,10 +61,14 @@ const Chatbot = () => {
 
         {/* Chat Body */}
         <div className="bg-[#f8fafb] p-5 h-[160px] flex flex-col justify-end">
-          <div className="bg-white p-3 rounded-2xl rounded-tl-sm shadow-sm inline-block max-w-[85%] border border-gray-50 self-start">
-            <p className="text-sm text-slate-700 leading-snug">
-              Hi there! 👋<br/><br/>How can we help you with your next construction or design project?
-            </p>
+          <div 
+            className="bg-white p-3 rounded-2xl rounded-tl-sm shadow-sm inline-block max-w-[85%] border border-gray-50 self-start"
+            dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}
+          >
+            <p 
+              className="text-sm text-slate-700 leading-snug"
+              dangerouslySetInnerHTML={{ __html: t("chatbot.greeting") }}
+            />
           </div>
         </div>
 
@@ -73,7 +79,8 @@ const Chatbot = () => {
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Type your message..."
+            placeholder={t("chatbot.placeholder")}
+            dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}
             /* CRITICAL FIX: text-[16px] prevents iOS Safari from auto-zooming the screen when touched! */
             className="flex-1 bg-gray-50 text-[16px] md:text-sm rounded-full px-4 py-2 outline-none shrink min-w-0 focus:ring-2 focus:ring-[#37C2CF]/20 border border-transparent focus:border-[#37C2CF]/30 transition-all text-slate-700"
           />
@@ -111,8 +118,11 @@ const Chatbot = () => {
 
       {/* Tooltip (Only shows on Desktop when closed) */}
       {!isOpen && (
-        <span className="absolute top-1/2 -translate-y-1/2 right-16 bg-white text-slate-800 text-xs md:text-sm font-semibold px-3 py-1.5 rounded-[10px] shadow-[0_4px_12px_rgba(0,0,0,0.08)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none hidden md:block">
-          Need help? Chat with us
+        <span 
+          className="absolute top-1/2 -translate-y-1/2 right-16 bg-white text-slate-800 text-xs md:text-sm font-semibold px-3 py-1.5 rounded-[10px] shadow-[0_4px_12px_rgba(0,0,0,0.08)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none hidden md:block"
+          dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}
+        >
+          {t("chatbot.tooltip")}
           <div className="absolute top-1/2 -translate-y-1/2 -right-1.5 w-3 h-3 bg-white rotate-45"></div>
         </span>
       )}
