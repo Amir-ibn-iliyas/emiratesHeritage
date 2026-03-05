@@ -8,7 +8,7 @@ const Footer = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="bg-[#0a1628]">
+    <footer className="relative z-50 bg-[#0a1628]">
       <div className="max-w-6xl mx-auto px-6 lg:px-8 py-10">
 
         {/* Brand + Tagline + Social */}
@@ -17,7 +17,7 @@ const Footer = () => {
             <img src={Logo} alt="Emirates Heritage" loading="lazy" decoding="async" className="w-8 h-8 object-contain" />
             <div>
               <span className="text-white font-semibold text-base block">Emirates Heritage</span>
-              <span className="text-white/30 text-xs">{t("footer.tagline")}</span>
+              <span className="text-white/60 text-xs">{t("footer.tagline")}</span>
             </div>
           </div>
 
@@ -25,7 +25,8 @@ const Footer = () => {
             href="https://www.instagram.com/emirates0heritage/"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-all"
+            aria-label="Visit our Instagram page"
+            className="w-9 h-9 cursor-pointer rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-all"
           >
             <Instagram size={16} />
           </a>
@@ -36,7 +37,7 @@ const Footer = () => {
 
         {/* Contact + Copyright */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-5 text-xs text-white/35">
+          <div className="flex flex-wrap items-center gap-5 text-xs text-white/60">
             <a href="tel:+971503195090" className="flex items-center gap-1.5 hover:text-white/60 transition-colors">
               <Phone size={12} />
               +971 50 319 5090
@@ -51,7 +52,7 @@ const Footer = () => {
             </span>
           </div>
 
-          <p className="text-[11px] text-white/20">
+          <p className="text-[11px] text-white/60">
             © {year} Emirates Heritage
           </p>
         </div>

@@ -53,6 +53,7 @@ const Chatbot = () => {
           </div>
           <button 
             onClick={() => setIsOpen(false)}
+            aria-label="Close chat window"
             className="text-white/60 hover:text-white transition-colors p-1"
           >
             <X size={20} />
@@ -86,6 +87,7 @@ const Chatbot = () => {
           />
           <button 
             type="submit"
+            aria-label="Send WhatsApp message"
             className="w-10 h-10 rounded-full bg-[#37C2CF] text-white flex items-center justify-center hover:bg-[#2eb3bf] transition-colors shrink-0 shadow-md shadow-[#37C2CF]/20"
           >
             <Send size={16} className="-ml-0.5" />
