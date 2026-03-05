@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
-import Home from "./pages/Home";
-import Services from "./pages/Services";
-import Contact from "./pages/Contact";
-import GalleryPage from "./pages/GalleryPage";
 import Preloader from "./components/Preloader";
+
+// Lazy load pages to split the Javascript bundle
+const Home = React.lazy(() => import("./pages/Home"));
+const Services = React.lazy(() => import("./pages/Services"));
+const Contact = React.lazy(() => import("./pages/Contact"));
+const GalleryPage = React.lazy(() => import("./pages/GalleryPage"));
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -14,14 +16,16 @@ function App() {
     <>
       {loading && <Preloader onComplete={() => setLoading(false)} />}
       <Router>
-        <Routes>
-          <Route path="/" element={<MainLayout />}>
-            <Route index element={<Home />} />
-            <Route path="services" element={<Services />} />
-            <Route path="gallery" element={<GalleryPage />} />
-            <Route path="contact" element={<Contact />} />
-          </Route>
-        </Routes>
+        <Suspense fallback={<div className="h-screen w-screen bg-[#0a1628]"></div>}>
+          <Routes>
+            <Route path="/" element={<MainLayout />}>
+              <Route index element={<Home />} />
+              <Route path="services" element={<Services />} />
+              <Route path="gallery" element={<GalleryPage />} />
+              <Route path="contact" element={<Contact />} />
+            </Route>
+          </Routes>
+        </Suspense>
       </Router>
     </>
   );
