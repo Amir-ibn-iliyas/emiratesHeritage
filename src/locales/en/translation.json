@@ -194,5 +194,11 @@
     "typicallyReplies": "Typically replies instantly",
     "greeting": "Hi there! 👋<br/><br/>How can we help you with your next construction or design project?",
     "placeholder": "Type your message..."
+  },
+  "notfound": {
+    "title": "404",
+    "subtitle": "Page Not Found",
+    "desc": "The page you are looking for does not exist or has been moved.",
+    "button": "Back to Home"
   }
 }

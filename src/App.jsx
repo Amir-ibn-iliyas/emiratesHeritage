@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 const Services = React.lazy(() => import("./pages/Services"));
 const Contact = React.lazy(() => import("./pages/Contact"));
 const GalleryPage = React.lazy(() => import("./pages/GalleryPage"));
+const NotFound = React.lazy(() => import("./pages/NotFound"));
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -23,6 +24,7 @@ function App() {
               <Route path="services" element={<Services />} />
               <Route path="gallery" element={<GalleryPage />} />
               <Route path="contact" element={<Contact />} />
+              <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
         </Suspense>
