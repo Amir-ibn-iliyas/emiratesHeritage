@@ -14,7 +14,7 @@ const Footer = () => {
         {/* Brand + Tagline + Social */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="flex items-center gap-3">
-            <img src={Logo} alt="Emirates Heritage" className="w-8 h-8 object-contain" />
+            <img src={Logo} alt="Emirates Heritage" loading="lazy" decoding="async" className="w-8 h-8 object-contain" />
             <div>
               <span className="text-white font-semibold text-base block">Emirates Heritage</span>
               <span className="text-white/30 text-xs">{t("footer.tagline")}</span>

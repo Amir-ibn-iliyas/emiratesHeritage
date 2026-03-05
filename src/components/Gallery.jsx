@@ -106,7 +106,9 @@ const Gallery = () => {
               >
                 <img 
                   src={img} 
-                  alt="Gallery Item" 
+                  alt="Gallery Item"
+                  loading="lazy"
+                  decoding="async" 
                   className="w-full h-full object-cover pointer-events-none" // pointer-events-none prevents image drag conflict
                 />
                 {/* Simple Overlay for Mobile */}
@@ -153,6 +155,8 @@ const GalleryCard = ({ src, tall }) => {
       <motion.img
         src={src}
         alt="Gallery"
+        loading="lazy"
+        decoding="async"
         className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-110"
         whileHover={{ scale: 1.05 }}
         transition={{ type: "spring", damping: 15, stiffness: 120 }}

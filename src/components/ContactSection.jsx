@@ -55,6 +55,8 @@ const ContactSection = () => {
               <img
                 src={contactIllustration}
                 alt="Get in Touch Illustration"
+                loading="lazy"
+                decoding="async"
                 className="w-full   object-contain"
               />
            

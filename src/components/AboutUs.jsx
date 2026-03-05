@@ -98,6 +98,8 @@ const AboutUs = () => {
             <motion.img
               src={categoryImages[activeTab]}
               alt={t(`about.${tabKey}.title`)}
+              loading="lazy"
+              decoding="async"
               whileHover={{
                 scale: 1.02,
                 rotate: 1.2,
@@ -185,6 +187,8 @@ const AboutUs = () => {
                   duration: 0.5,
                 }}
                 src={provideLeftImg}
+                loading="lazy"
+                decoding="async"
                 className="w-full cursor-pointer md:w-[400px] rounded-lg h-64 md:h-full object-cover"
                 alt="construction"
               />
