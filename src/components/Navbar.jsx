@@ -141,8 +141,8 @@ const Navbar = () => {
                 <img
                   src={Logo}
                   alt="Emirates Heritage"
-                  className={`object-contain transition-all duration-500 ${
-                    scrolled ? "w-7 h-7 md:w-8 md:h-8" : "w-8 h-8 md:w-10 md:h-10"
+                  className={`object-cover rounded-full transition-all duration-500 ${
+                    scrolled ? "w-7 h-7 md:w-9 md:h-9" : "w-8 h-8 md:w-10 md:h-10"
                   }`}
                 />
                 <span
