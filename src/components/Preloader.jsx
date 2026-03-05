@@ -6,7 +6,7 @@ import { gsap } from "gsap";
 const FRAME_COUNT = 80;
 const FRAME_PATH = "/emirates-hero/ezgif-frame-";
 const padFrame = (n) => String(n).padStart(3, "0");
-const getFrameSrc = (i) => `${FRAME_PATH}${padFrame(i + 1)}.jpg`;
+const getFrameSrc = (i) => `${FRAME_PATH}${padFrame(i + 1)}.webp`;
 
 const MIN_DISPLAY_MS = 3500;
 const STRIP_COUNT = 5;

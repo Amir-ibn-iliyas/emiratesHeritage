@@ -1,7 +1,7 @@
 import React from "react";
 import { Phone, Mail, MapPin, Instagram } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import Logo from "../assets/images/logo.png";
+import Logo from "../assets/images/logo.webp";
 
 const Footer = () => {
   const year = new Date().getFullYear();

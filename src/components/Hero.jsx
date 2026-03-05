@@ -15,7 +15,7 @@ const FRAME_PATH = "/emirates-hero/ezgif-frame-";
 const SCRUB_SMOOTHING = 1.5;
 
 const padFrame = (n) => String(n).padStart(3, "0");
-const getFrameSrc = (i) => `${FRAME_PATH}${padFrame(i + 1)}.jpg`;
+const getFrameSrc = (i) => `${FRAME_PATH}${padFrame(i + 1)}.webp`;
 
 /* ─────────────────────────────────────────────
    Hero Component — 3-Act Mask-Reveal Storytelling

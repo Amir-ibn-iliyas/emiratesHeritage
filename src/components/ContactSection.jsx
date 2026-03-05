@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 // Import your local image
-import contactIllustration from "../assets/images/contact.png";
+import contactIllustration from "../assets/images/contact.webp";
 import ContactForm from "./ContactForm";
 
 const ContactSection = () => {
