@@ -4,7 +4,7 @@ import MainLayout from "./layout/MainLayout";
 import Preloader from "./components/Preloader";
 
 // Lazy load pages to split the Javascript bundle
-const Home = React.lazy(() => import("./pages/Home"));
+import Home from "./pages/Home";
 const Services = React.lazy(() => import("./pages/Services"));
 const Contact = React.lazy(() => import("./pages/Contact"));
 const GalleryPage = React.lazy(() => import("./pages/GalleryPage"));
